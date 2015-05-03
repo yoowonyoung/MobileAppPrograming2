@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/imageButton3"
+        android:layout_alignEnd="@+id/imageButton3"
+        android:background="#fffdfdfe">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="53dp"
+            android:id="@+id/imageView3"
+            android:background="@drawable/bar1"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageButton3"
+            android:onClick="onClick"
+            android:background="@drawable/plus1"
+            android:layout_margin="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/imageButton2"
+            android:onClick="onClick"
+            android:background="@drawable/home1"
+            android:layout_marginRight="34dp"
+            android:layout_marginEnd="34dp"
+            android:layout_alignTop="@+id/imageButton3"
+            android:layout_toLeftOf="@+id/imageButton3"
+            android:layout_toStartOf="@+id/imageButton3" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:id="@+id/imageView2"
+            android:layout_below="@+id/imageView3"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/yu" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:id="@+id/imageView11"
+            android:layout_below="@+id/imageView2"
+            android:layout_toStartOf="@+id/imageButton4"
+            android:background="@drawable/yu_bar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="40sp"
+            android:id="@+id/imageView12"
+            android:background="@drawable/yu3"
+            android:layout_below="@+id/imageView11"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/imageView12"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="냉장실 "
+        android:layout_margin="16dp"
+        android:textColor="#fffffff7"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+        android:id="@+id/textView2"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_alignTop="@+id/imageButton3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
