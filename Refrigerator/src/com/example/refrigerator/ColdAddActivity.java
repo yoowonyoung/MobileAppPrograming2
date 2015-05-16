@@ -1,20 +1,9 @@
 package com.example.refrigerator;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.Toast;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -26,10 +15,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * Created by DeokR on 2015-02-25.
@@ -49,18 +44,18 @@ public class ColdAddActivity extends Activity {
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_cold_add_activity);
-        btninsert = (ImageButton) findViewById(R.id.imageButton6);
-        etname = (EditText) findViewById(R.id.textView3);
-        etbuyyear = (EditText) findViewById(R.id.editText4);
-        etbuymonth = (EditText) findViewById(R.id.editText5);
-        etbuyday = (EditText) findViewById(R.id.editText7);
-        etlimityear = (EditText) findViewById(R.id.editText6);
-        etlimitmonth = (EditText) findViewById(R.id.editText8);
-        etlimitday = (EditText) findViewById(R.id.editText9);
+    	setContentView(R.layout.activity_cool_add_acitvity);
         super.onCreate(savedInstanceState);
+        btninsert = (ImageButton) findViewById(R.id.AddBtn);
+        etname = (EditText) findViewById(R.id.coolName);
+        etbuyyear = (EditText) findViewById(R.id.coldBuyYear);
+        etbuymonth = (EditText) findViewById(R.id.coldBuyMonth);
+        etbuyday = (EditText) findViewById(R.id.coldBuyDay);
+        etlimityear = (EditText) findViewById(R.id.coldLimitYear);
+        etlimitmonth = (EditText) findViewById(R.id.coldLimitMonth);
+        etlimitday = (EditText) findViewById(R.id.coldLimitDay);
+        spinner = (Spinner) findViewById(R.id.categorySpinner);
 
-        spinner = (Spinner) findViewById(R.id.spinner1);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

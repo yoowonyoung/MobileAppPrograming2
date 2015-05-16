@@ -24,13 +24,13 @@
             android:name=".ColdActivity">
         </activity>
         <activity
-            android:name=".ColdAddAcitivity">
+            android:name=".ColdAddActivity">
         </activity>
         <activity
             android:name=".CoolActivity">
         </activity>
         <activity
-            android:name=".CoolAddAcitvity">
+            android:name=".CoolAddActivity">
         </activity>
         <activity
             android:name=".MainActivity"

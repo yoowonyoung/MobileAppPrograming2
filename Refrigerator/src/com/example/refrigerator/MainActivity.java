@@ -23,12 +23,12 @@ public class MainActivity extends Activity {
 
         switch (view.getId())
         {
-            case R.id.button:
+            case R.id.coolBtn:
             Intent intent = new Intent(this, CoolActivity.class);
             startActivity(intent);
             break;
 
-            case R.id.button2:
+            case R.id.ColdBtn:
                 Intent intent1 = new Intent(this, ColdActivity.class);
                 startActivity(intent1);
                 break;

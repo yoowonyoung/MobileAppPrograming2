@@ -1,17 +1,9 @@
 package com.example.refrigerator;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Vibrator;
-import android.view.View;
-import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,20 +15,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Vibrator;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Created by DeokR on 2015-02-15.
  */
-public class ColdActivity extends Activity {
+public class ColdActivity extends Activity {//냉동실 화면 보여주는 Activity
 
 
     TextView et;
     int index;
-    ArrayList<ListItem> listItems = new ArrayList<ListItem>();
+    ArrayList<ListItem> listItems = new ArrayList<ListItem>();//ListItem 형식의 배열을 받아옴. 
     ListItem list;
     android.os.Handler hanler = new android.os.Handler();
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
@@ -45,7 +40,7 @@ public class ColdActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cold);
-        et = (TextView)findViewById(R.id.textView4);
+        et = (TextView)findViewById(R.id.coldDataPrint);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -64,14 +59,14 @@ public class ColdActivity extends Activity {
         switch (view.getId())
         {
 
-            case R.id.imageButton4: //case문으로 나누어 이미지버튼을 눌렀을때 행해지는 이벤트를 구성하였다.
+            case R.id.coldUperBtn: //case문으로 나누어 이미지버튼을 눌렀을때 행해지는 이벤트를 구성하였다.
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
 
                 finish();
                 break;
 
-            case R.id.imageButton3:
+            case R.id.coldAddPageBtn:
                 Intent intent1 = new Intent(this, ColdAddActivity.class);
                 startActivity(intent1);
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE); //버튼클릭시 운영체제에서 핸드폰에게 진동이벤트를 부여한다.

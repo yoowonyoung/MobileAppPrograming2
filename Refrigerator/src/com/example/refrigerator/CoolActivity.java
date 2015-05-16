@@ -70,7 +70,7 @@ public class CoolActivity extends Activity {
                 finish();
                 break;
 
-            case R.id.imageButton3:
+            case R.id.coldAddPageBtn:
                 Intent intent1 = new Intent(this, CoolAddActivity.class);
                 startActivity(intent1);
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
