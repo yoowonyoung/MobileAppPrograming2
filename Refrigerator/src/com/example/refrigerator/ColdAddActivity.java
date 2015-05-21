@@ -17,6 +17,7 @@ import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -41,8 +42,11 @@ public class ColdAddActivity extends Activity {
     EditText etlimityear;
     EditText etlimitmonth;
     EditText etlimitday;
-    @Override
+    
+    SQLiteDatabase database;
+    String dbName = "MyDB";
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
     	setContentView(R.layout.activity_cool_add_acitvity);
         super.onCreate(savedInstanceState);
@@ -55,6 +59,7 @@ public class ColdAddActivity extends Activity {
         etlimitmonth = (EditText) findViewById(R.id.coldLimitMonth);
         etlimitday = (EditText) findViewById(R.id.coldLimitDay);
         spinner = (Spinner) findViewById(R.id.categorySpinner);
+        createDatabase();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -85,6 +90,8 @@ public class ColdAddActivity extends Activity {
                             "구매일 정보를 입력 하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                insertData(etname.getText().toString(), etbuyyear.getText().toString(), etbuymonth.getText().toString(), etbuyday.getText().toString(), etlimityear.getText().toString(), etlimitmonth.getText().toString(), etlimitday.getText().toString());
+                /*
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -94,7 +101,7 @@ public class ColdAddActivity extends Activity {
                             e.printStackTrace();
                         }
                     }
-                }).start();
+                }).start();*/
             }
 
         });
@@ -117,6 +124,7 @@ public class ColdAddActivity extends Activity {
         finish();
 
     }
+    /*
     private void post() throws UnsupportedEncodingException {
         HttpClient client = new DefaultHttpClient();
         String url = SERVER_ADDRESS + "/insert.php";
@@ -148,5 +156,30 @@ public class ColdAddActivity extends Activity {
 
 
 
+    }*/
+    
+    public void createDatabase(){
+        database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
     }
+ 
+
+    private void insertData(String name, String buyyear, String buymonth, String buyday, String limityear, String limitmonth, String limitday){
+    	 
+        database.beginTransaction();
+ 
+        try{
+            String sql = "insert into coldTable (name, buyyear, buymonth, buyday, limityear, limitmonth, limitday)"
+            		+ " values ('"+name+ "','"+buyyear+ "','"+buymonth+ "','"+buyday+ "','"+limityear+ "','"+limitmonth+ "','"+limitday+ "');";
+            database.execSQL(sql);
+            database.setTransactionSuccessful();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            database.endTransaction();
+        }
+        finish();
+ 
+    }
+  
+    
 }

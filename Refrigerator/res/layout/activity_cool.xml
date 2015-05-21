@@ -68,17 +68,21 @@
             android:layout_below="@+id/imageView11"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView5"
-            android:layout_below="@+id/coldDeco4"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/coldDeco4"
+            android:orientation="vertical" >
+            
+            <ListView
+                android:id="@+id/l_view_cool"
+                android:layout_width="fill_parent"
+                android:layout_height="347dp"
+                android:layout_gravity="center_vertical" />
+			
+        </LinearLayout>
 
     </RelativeLayout>
 

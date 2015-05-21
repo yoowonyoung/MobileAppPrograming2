@@ -406,7 +406,7 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f090069
+int id action_settings 0x7f09006c
 int id activity_chooser_view_content 0x7f090021
 int id always 0x7f090014
 int id beginning 0x7f09001b
@@ -418,7 +418,6 @@ int id coldAddPageBtn 0x7f090041
 int id coldBuyDay 0x7f090063
 int id coldBuyMonth 0x7f090060
 int id coldBuyYear 0x7f090062
-int id coldDataPrint 0x7f090046
 int id coldDeco1 0x7f09004c
 int id coldDeco3 0x7f090043
 int id coldDeco4 0x7f090045
@@ -450,6 +449,8 @@ int id image 0x7f090023
 int id imageButton2 0x7f09005a
 int id imageView1 0x7f090058
 int id imageView11 0x7f090044
+int id l_view_cold 0x7f090046
+int id l_view_cool 0x7f09005b
 int id listMode 0x7f09000a
 int id list_item 0x7f090025
 int id mainImg 0x7f090066
@@ -481,8 +482,10 @@ int id showTitle 0x7f090012
 int id split_action_bar 0x7f090004
 int id submit_area 0x7f09003c
 int id tabMode 0x7f09000c
-int id textView5 0x7f09005b
 int id title 0x7f090027
+int id txtBuyInfo 0x7f09006a
+int id txtLimitInfo 0x7f09006b
+int id txtName 0x7f090069
 int id up 0x7f090001
 int id useLogo 0x7f090013
 int id withText 0x7f090018
@@ -516,7 +519,8 @@ int layout activity_cold_add_activity 0x7f030018
 int layout activity_cool 0x7f030019
 int layout activity_cool_add_acitvity 0x7f03001a
 int layout activity_main 0x7f03001b
-int layout support_simple_spinner_dropdown_item 0x7f03001c
+int layout listviewitem 0x7f03001c
+int layout support_simple_spinner_dropdown_item 0x7f03001d
 int menu cold 0x7f0d0000
 int menu cold_add_acitivity 0x7f0d0001
 int menu cold_add_acitvity 0x7f0d0002
@@ -540,7 +544,11 @@ int string abc_shareactionprovider_share_with 0x7f0a000f
 int string abc_shareactionprovider_share_with_application 0x7f0a000e
 int string abc_toolbar_collapse_description 0x7f0a0004
 int string action_settings 0x7f0a0016
+int string alert_msg_delete 0x7f0a001e
+int string alert_title_question 0x7f0a001b
 int string app_name 0x7f0a0010
+int string button_no 0x7f0a001d
+int string button_yes 0x7f0a001c
 int string hello 0x7f0a0011
 int string hello_world 0x7f0a0015
 int string menu_settings 0x7f0a0012

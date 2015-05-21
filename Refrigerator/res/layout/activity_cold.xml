@@ -70,16 +70,21 @@
             android:layout_below="@+id/imageView11"
             android:background="@drawable/yu3" />
 
-        <TextView
-            android:id="@+id/coldDataPrint"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/coldDeco4" />
+            android:layout_below="@+id/coldDeco4"
+            android:orientation="vertical" >
+            
+            <ListView
+                android:id="@+id/l_view_cold"
+                android:layout_width="fill_parent"
+                android:layout_height="347dp"
+                android:layout_gravity="center_vertical" />
+			
+        </LinearLayout>
 
     </RelativeLayout>
 

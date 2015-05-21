@@ -29,4 +29,18 @@ public class ListItem {
     public void setData(String[] data){
         mData = data;
     }
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return mData[0];
+	}
+	
+	public String getBuyInfo() {
+		// TODO Auto-generated method stub
+		return "구매일 : " + mData[1] + " - "+ mData[2] + " - "+ mData[3];
+	}
+	public String getLimitInfo() {
+		// TODO Auto-generated method stub
+		return "유통기한 : " + mData[4] + " - "+ mData[5] + " - "+ mData[6];
+	}
 }
