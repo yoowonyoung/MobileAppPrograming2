@@ -1,6 +1,5 @@
 package com.example.refrigerator;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -95,7 +94,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
                 finish();
                 break;
 
-            case R.id.coldAddPageBtn:
+            case R.id.coolAddPageBtn:
                 Intent intent1 = new Intent(this, CoolAddActivity.class);
                 startActivity(intent1);
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

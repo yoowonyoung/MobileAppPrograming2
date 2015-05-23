@@ -34,7 +34,6 @@ import android.widget.Toast;
 public class CoolAddActivity extends Activity {
 
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
-    Spinner spinner;
     ImageButton btninsert;
     EditText etname;
     EditText etbuyyear;
@@ -51,29 +50,15 @@ public class CoolAddActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_cool_add_acitvity);
         super.onCreate(savedInstanceState);
-        btninsert = (ImageButton) findViewById(R.id.AddBtn);
+        btninsert = (ImageButton) findViewById(R.id.coolAddBtn);
         etname = (EditText) findViewById(R.id.coolName);
-        etbuyyear = (EditText) findViewById(R.id.coldBuyYear);
-        etbuymonth = (EditText) findViewById(R.id.coldBuyMonth);
-        etbuyday = (EditText) findViewById(R.id.coldBuyDay);
-        etlimityear = (EditText) findViewById(R.id.coldLimitYear);
-        etlimitmonth = (EditText) findViewById(R.id.coldLimitMonth);
-        etlimitday = (EditText) findViewById(R.id.coldLimitDay);
-        spinner = (Spinner) findViewById(R.id.categorySpinner);
+        etbuyyear = (EditText) findViewById(R.id.coolBuyYear);
+        etbuymonth = (EditText) findViewById(R.id.coolBuyMonth);
+        etbuyday = (EditText) findViewById(R.id.coolBuyDay);
+        etlimityear = (EditText) findViewById(R.id.coolLimitYear);
+        etlimitmonth = (EditText) findViewById(R.id.coolLimitMonth);
+        etlimitday = (EditText) findViewById(R.id.coolLimitDay);
         createDatabase();
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(getApplicationContext(), "고르신 항목은 " + parent.getItemAtPosition(position).toString() + " 입니다.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         btninsert.setOnClickListener(new View.OnClickListener() {
             @Override

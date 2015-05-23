@@ -1,290 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="12" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <!-- 식품추가하기 글과 버튼 -->
+
+    <LinearLayout
         android:id="@+id/relativeLayout"
-        android:layout_alignParentBottom="true"
-       >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bar1"
+        android:orientation="horizontal"
+        android:weightSum="6" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:id="@+id/TopLineImg"
-            android:background="@drawable/bar1"
+        <TextView
+            android:id="@+id/ScreenNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:layout_weight="3"
+            android:text="식료품 추가_ 냉장실 "
+            android:textColor="#fffffff7"
+            android:textStyle="bold" />
 
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="2" />
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/coolAddBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/home1"
+            android:onClick="onClick" />
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="식료품 추가_ 냉장실 "
-        android:layout_margin="16dp"
-        android:textColor="#fffffff7"
-        android:textStyle="bold"
-        android:textSize="20sp"
+    <!-- deco1,2,coldInfo -->
 
-        android:id="@+id/ScreenNameText"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignTop="@+id/coldAddPageBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <ImageView
+        android:id="@+id/Deco1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/under2" />
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <ImageView
+        android:id="@+id/Deco2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/chi" />
 
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+    <ImageView
+        android:id="@+id/coldInfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/information5" />
 
-        </RelativeLayout>
+    <!-- 식재료 추가 폼 -->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical" >
 
+        <!-- 식품명 -->
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-            <RelativeLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/coldAddBtn"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="식품명" />
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+            <EditText
+                android:id="@+id/coolName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/re23"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true">
+        <!-- 구매일자 -->
 
-                        <RelativeLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:id="@+id/re99"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-                            <RelativeLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:id="@+id/re90"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentLeft="true"
-                                android:layout_alignParentStart="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="구매일자" />
 
-                                <RelativeLayout
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentTop="true"
-                                    android:layout_alignParentLeft="true"
-                                    android:layout_alignParentStart="true">
+            <EditText
+                android:id="@+id/coolBuyYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="61sp"
-                                        android:id="@+id/Deco1"
-                                        android:background="@drawable/under2"
-                                        android:layout_marginTop="55dp"
-                                        android:layout_alignParentTop="true"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="년" />
 
-                                    <ImageView
-                                        android:id="@+id/coolCategoryImg"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="42dp"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_below="@+id/Deco1"
-                                        android:background="@drawable/menu1123" />
+            <EditText
+                android:id="@+id/coolBuyMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                    <Spinner
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
-                                        android:id="@+id/categorySpinner"
-                                        android:prompt="@string/promt_menu"
-                                        android:entries="@array/menu"
-                                        android:background="@drawable/folder2"
-                                        android:layout_marginRight="30dp"
-                                        android:layout_marginEnd="30dp"
-                                        android:layout_marginTop="8dp"
-                                        android:layout_alignTop="@+id/coolCategoryImg"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_alignParentEnd="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월" />
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="90sp"
-                                        android:id="@+id/Deco2"
-                                        android:background="@drawable/chi"
-                                        android:layout_below="@+id/coolCategoryImg"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true" />
+            <EditText
+                android:id="@+id/coolBuyDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="42dp"
-                                        android:id="@+id/coldInfo"
-                                        android:background="@drawable/information5"
-                                        android:layout_below="@+id/Deco2"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일" />
+        </LinearLayout>
 
-                                    <ImageView
-                                        android:id="@+id/coldInfoContent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="200dp"
-                                        android:layout_alignParentBottom="true"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_below="@+id/coldInfo"
-                                        android:background="@drawable/test15" />
+        <!-- 유통기한 -->
 
-                                    <EditText
-                                        android:id="@+id/coolName"
-                                        android:layout_width="90dp"
-                                        android:layout_height="32dp"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_alignTop="@+id/coldInfoContent"
-                                        android:layout_marginLeft="129dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_marginStart="129dp"
-                                        android:layout_marginTop="19dp"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:hint="이름"
-                                        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-                                    <EditText
-                                        android:layout_width="40dp"
-                                        android:layout_height="30dp"
-                                        android:textAppearance="?android:attr/textAppearanceSmall"
-                                        android:hint=""
-                                        android:id="@+id/coldBuyMonth"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:layout_marginLeft="26dp"
-                                        android:layout_marginStart="26dp"
-                                        android:layout_above="@+id/coldLimitYear"
-                                        android:layout_toRightOf="@+id/coldBuyYear"
-                                        android:layout_toEndOf="@+id/coldBuyYear" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="유통기한" />
 
-                                    <EditText
-                                        android:layout_width="60dp"
-                                        android:layout_height="30dp"
-                                        android:textAppearance="?android:attr/textAppearanceSmall"
-                                        android:hint=""
-                                        android:id="@+id/coldLimitYear"
-                                        android:layout_marginTop="19dp"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:layout_below="@+id/coldBuyYear"
-                                        android:layout_toLeftOf="@+id/coldBuyMonth"
-                                        android:layout_toStartOf="@+id/coldBuyMonth" />
+            <EditText
+                android:id="@+id/coolLimitYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                    <EditText
-                                        android:layout_width="40dp"
-                                        android:layout_height="30dp"
-                                        android:textAppearance="?android:attr/textAppearanceSmall"
-                                        android:hint=""
-                                        android:id="@+id/coldBuyDay"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:layout_alignTop="@+id/coldBuyMonth"
-                                        android:layout_alignRight="@+id/categorySpinner"
-                                        android:layout_alignEnd="@+id/categorySpinner" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="년" />
 
-                                    <EditText
-                                        android:layout_width="40dp"
-                                        android:layout_height="30dp"
-                                        android:textAppearance="?android:attr/textAppearanceSmall"
-                                        android:hint=""
-                                        android:id="@+id/coldLimitMonth"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:layout_alignTop="@+id/coldLimitYear"
-                                        android:layout_alignLeft="@+id/coldBuyMonth"
-                                        android:layout_alignStart="@+id/coldBuyMonth" />
+            <EditText
+                android:id="@+id/coolLimitMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                    <EditText
-                                        android:layout_width="40dp"
-                                        android:layout_height="30dp"
-                                        android:textAppearance="?android:attr/textAppearanceSmall"
-                                        android:hint=""
-                                        android:id="@+id/coldLimitDay"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:layout_alignTop="@+id/coldLimitMonth"
-                                        android:layout_alignLeft="@+id/coldBuyDay"
-                                        android:layout_alignStart="@+id/coldBuyDay" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월" />
 
-                                    <EditText
-                                        android:id="@+id/coldBuyYear"
-                                        android:layout_width="60dp"
-                                        android:layout_height="30dp"
-                                        android:layout_below="@+id/coolName"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="44dp"
-                                        android:background="@drawable/abc_popup_background_mtrl_mult"
-                                        android:ems="10"
-                                        android:textAppearance="?android:attr/textAppearanceSmall" >
+            <EditText
+                android:id="@+id/coolLimitDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/abc_popup_background_mtrl_mult"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                                        <requestFocus />
-                                    </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일" />
+        </LinearLayout>
+    </LinearLayout>
 
-                                </RelativeLayout>
+    <requestFocus />
 
-                            </RelativeLayout>
-
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="657dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="0dp">
-
-                </RelativeLayout>
-
-                <ImageButton
-                    android:id="@+id/AddBtn"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="28dp"
-                    android:layout_marginRight="28dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/home1"
-                    android:onClick="onClick" />
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-
-
-</RelativeLayout>
+</LinearLayout>

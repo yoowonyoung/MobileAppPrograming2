@@ -1,105 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" style="android:imageButtonStyle">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="14" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/relativeLayout"
-        android:layout_alignParentBottom="true"
-        android:background="#fffdfdfe">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bar1"
+        android:weightSum="9" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
-            android:id="@+id/TopLineImg"
-            android:background="@drawable/bar1"
+        <TextView
+            android:id="@+id/ScreenNameText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="냉장실 "
+            android:textColor="#fffffff7"
+            android:textStyle="bold" />
 
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageButton
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/coldAddPageBtn"
-            android:onClick="onClick"
-            android:background="@drawable/plus1"
-            android:layout_margin="16dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" style="android:imageButtonStyle"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5" />
 
         <ImageButton
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:id="@+id/imageButton2"
-            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:background="@drawable/home1"
-            android:layout_marginRight="34dp"
-            android:layout_marginEnd="34dp"
-            android:layout_alignTop="@+id/coldAddPageBtn"
-            android:layout_toLeftOf="@+id/coldAddPageBtn"
-            android:layout_toStartOf="@+id/coldAddPageBtn" />
+            android:onClick="onClick" />
+        
+        <ImageButton
+            android:id="@+id/coolAddPageBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/plus1"
+            android:onClick="onClick" />
+    </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="50sp"
-            android:id="@+id/coldDeco3"
-            android:layout_below="@+id/TopLineImg"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/yu" />
+    <ImageView
+        android:id="@+id/coldDeco3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/yu" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="20sp"
-            android:id="@+id/imageView11"
-            android:layout_below="@+id/coldDeco3"
-            android:background="@drawable/yu_bar"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/yu_bar" />
 
-        <ImageView
-            android:layout_width="260dp"
-            android:layout_height="40sp"
-            android:id="@+id/coldDeco4"
-            android:background="@drawable/yu3"
-            android:layout_below="@+id/imageView11"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/coldDeco4"
-            android:orientation="vertical" >
-            
-            <ListView
-                android:id="@+id/l_view_cool"
-                android:layout_width="fill_parent"
-                android:layout_height="347dp"
-                android:layout_gravity="center_vertical" />
-			
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/coldDeco4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/yu3" />
 
-    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10.5"
+        android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="냉장실 "
-        android:layout_margin="16dp"
-        android:textColor="#fffffff7"
-        android:textStyle="bold"
-        android:textSize="20sp"
+        <ListView
+            android:id="@+id/l_view_cool"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
-        android:id="@+id/ScreenNameText"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
+</LinearLayout>

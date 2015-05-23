@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +34,6 @@ import android.widget.Toast;
 public class ColdAddActivity extends Activity {
 
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
-    Spinner spinner;
     ImageButton btninsert;
     EditText etname;
     EditText etbuyyear;
@@ -48,31 +48,17 @@ public class ColdAddActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	setContentView(R.layout.activity_cool_add_acitvity);
+    	setContentView(R.layout.activity_cold_add_activity);
         super.onCreate(savedInstanceState);
-        btninsert = (ImageButton) findViewById(R.id.AddBtn);
-        etname = (EditText) findViewById(R.id.coolName);
+        btninsert = (ImageButton) findViewById(R.id.coldAddBtn);
+        etname = (EditText) findViewById(R.id.coldName);
         etbuyyear = (EditText) findViewById(R.id.coldBuyYear);
         etbuymonth = (EditText) findViewById(R.id.coldBuyMonth);
         etbuyday = (EditText) findViewById(R.id.coldBuyDay);
         etlimityear = (EditText) findViewById(R.id.coldLimitYear);
         etlimitmonth = (EditText) findViewById(R.id.coldLimitMonth);
         etlimitday = (EditText) findViewById(R.id.coldLimitDay);
-        spinner = (Spinner) findViewById(R.id.categorySpinner);
         createDatabase();
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(getApplicationContext(), "고르신 항목은 " + parent.getItemAtPosition(position).toString() + " 입니다.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         btninsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +104,7 @@ public class ColdAddActivity extends Activity {
 
     public void onClick(View view) {
 
+    	Log.e("onclick","!!!!!!!");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
 
