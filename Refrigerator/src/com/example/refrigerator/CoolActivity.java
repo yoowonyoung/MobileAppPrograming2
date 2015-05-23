@@ -82,7 +82,8 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         ListView list = (ListView)findViewById(R.id.l_view_cool);
  
         list.setAdapter(Adapter);
- 
+        list.setOnItemLongClickListener(this);
+
     }
 
     public void onClick(View view) {
@@ -201,7 +202,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String position = arr_id_list.get(selectedPos);
-                final String sql = "delete from coldTable where id = "+ position;
+                final String sql = "delete from coolTable where id = "+ position;
                 dialog.dismiss();
                 Log.i("test", "onclick");
                 database.execSQL(sql);
