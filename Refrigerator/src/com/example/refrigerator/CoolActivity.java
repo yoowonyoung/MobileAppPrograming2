@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
 	ArrayList<String> arrlist = null;
 	ArrayList<ListItem> arrlist2 = null;
     ArrayList<String> arr_id_list = null;
+    CustomAdapter Adapter = null;
     SQLiteDatabase database;
     String dbName = "MyDB";
     String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text);";
@@ -78,7 +80,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
     	createTable();
 
         selectData();
-        CustomAdapter Adapter = new CustomAdapter(this, R.layout.listviewitem, arrlist2);
+        Adapter = new CustomAdapter(this, R.layout.listviewitem, arrlist2);
         ListView list = (ListView)findViewById(R.id.l_view_cool);
  
         list.setAdapter(Adapter);
@@ -206,6 +208,9 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
                 dialog.dismiss();
                 Log.i("test", "onclick");
                 database.execSQL(sql);
+                arrlist2.clear();
+                selectData();
+                Adapter.notifyDataSetChanged();
             }
         });
  
@@ -241,4 +246,5 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
             e.printStackTrace();
         }
     }
+    
 }

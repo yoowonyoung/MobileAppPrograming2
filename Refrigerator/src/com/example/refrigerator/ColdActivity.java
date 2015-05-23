@@ -3,7 +3,9 @@ package com.example.refrigerator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,9 +25,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -43,7 +48,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
     SQLiteDatabase database;
     String dbName = "MyDB";
     String createTable = "create table coldTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text);";
-
+    ListView listview = null;
     //int index;
     ArrayList<ListItem> listItems = new ArrayList<ListItem>();//ListItem 형식의 배열을 받아옴. 
     ListItem list;
@@ -54,6 +59,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cold);
+        listview = (ListView) findViewById(R.id.l_view_cold);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
         /*new Thread(new Runnable() {
             @Override
@@ -197,7 +203,11 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
                 final String sql = "delete from coldTable where id = "+ position;
                 dialog.dismiss();
                 Log.i("test", "onclick");
-                database.execSQL(sql);                
+                database.execSQL(sql);
+                arrlist2.clear();
+                selectData();
+                Adapter.notifyDataSetChanged();
+
             }
         });
  
@@ -232,6 +242,5 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    
+    } 
 }
