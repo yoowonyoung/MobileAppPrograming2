@@ -53,5 +53,9 @@ public class CustomAdapter extends BaseAdapter {
 		limitInfo.setText(listviewitem.getLimitInfo());
 		return convertView;
 	}
-
+	public void refresh(Context context, int layout, ArrayList<ListItem> data){
+		this.inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.data=data;
+		this.layout=layout;
+	}
 }

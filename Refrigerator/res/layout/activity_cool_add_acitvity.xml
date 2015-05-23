@@ -92,6 +92,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/abc_popup_background_mtrl_mult"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+            <Button
+                android:id="@+id/btnScan"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_gravity="right"
+                android:text="SCAN" />
         </LinearLayout>
 
         <!-- 구매일자 -->

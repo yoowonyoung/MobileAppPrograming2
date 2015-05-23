@@ -1,27 +1,39 @@
 package com.example.refrigerator;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -46,6 +58,8 @@ public class CoolAddActivity extends Activity {
     SQLiteDatabase database;
     String dbName = "MyDB";
     
+    Button btnScan;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_cool_add_acitvity);
@@ -59,6 +73,19 @@ public class CoolAddActivity extends Activity {
         etlimitmonth = (EditText) findViewById(R.id.coolLimitMonth);
         etlimitday = (EditText) findViewById(R.id.coolLimitDay);
         createDatabase();
+        
+        btnScan = (Button)findViewById(R.id.btnScan);
+        
+        btnScan.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+				intent.putExtra("SCAN_FORMATS", "CODE_39,CODE_93,CODE_128,DATA_MATRIX,ITF,CODABAR,EAN_13,EAN_8,UPC_A,QR_CODE");
+				startActivityForResult(intent,0);
+			}
+		});
 
         btninsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +166,39 @@ public class CoolAddActivity extends Activity {
 
 
     }*/
+    private String get(String type, String code) {
+    	String url = SERVER_ADDRESS + "BarcodeSearch.php"+"?type="+type+"&code="+code;
+    	HttpPost post = new HttpPost(url);
+    	HttpClient client = new DefaultHttpClient();
+    	String json = "";
+
+    	String name = null;
+    	String expridate = null;
+    	
+    
+    	ResponseHandler reshandler = new BasicResponseHandler();
+    	try {
+    		HttpResponse response = client.execute(post);
+    		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
+    		StringBuilder sb = new StringBuilder();
+    		String line = null;
+    		while ((line = reader.readLine()) != null) {
+    			sb.append(line + "\n");
+    		}
+    		json = sb.toString();
+    		JSONObject root = new JSONObject(json);
+    		name = root.getString("name");
+    		Log.i("name : ", name);
+    		expridate = root.getString("expridate");
+    		Log.i("date : ", expridate);	
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	}
+    	return name + " " + expridate;
+    	
+	}
     public void createDatabase(){
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
     }
@@ -157,8 +217,52 @@ public class CoolAddActivity extends Activity {
             database.endTransaction();
         }
         finish();
- 
+        Intent intent = new Intent(this, CoolActivity.class);
+        startActivity(intent);
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+            	final String code = intent.getStringExtra("SCAN_RESULT");
+                final String type = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                            String result = get(type, code);
+                            String resultset[] = result.split(" ");
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", resultset[0]);
+                            bundle.putInt("date", Integer.parseInt(resultset[1]));
+                            Message msg = new Message();
+                            msg.setData(bundle);
+                            messageHandler.sendMessage(msg);
+                    }
+                }).start();
+            } else if (resultCode == RESULT_CANCELED) {
+               // Handle cancel
+               Log.i("App","Scan unsuccessful");
+            }
+       } 
+    }
+    private Handler messageHandler = new Handler() {
+    	public void handleMessage(Message msg){
+    		String name = msg.getData().getString("name");
+    		int expdate = msg.getData().getInt("date");
+    		long now = System.currentTimeMillis();
+        	Date date = new Date(now);
+        	SimpleDateFormat curYear = new SimpleDateFormat("yyyy");
+        	SimpleDateFormat curMonth = new SimpleDateFormat("MM");
+        	SimpleDateFormat curDay = new SimpleDateFormat("dd");
+        	etname.setText(name);
+    		etbuyyear.setText(curYear.format(date));
+    		etbuymonth.setText(curMonth.format(date));
+    		etbuyday.setText(curDay.format(date));
+    		date.setDate(date.getDate()+expdate);
+    		etlimityear.setText(curYear.format(date));
+    		etlimitmonth.setText(curMonth.format(date));
+    		etlimitday.setText(curDay.format(date));
+    	}
+    };
 }
 
 

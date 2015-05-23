@@ -39,6 +39,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
 	ArrayList<String> arrlist = null;
 	ArrayList<ListItem> arrlist2 = null;
     ArrayList<String> arr_id_list = null;
+    CustomAdapter Adapter = null;
     SQLiteDatabase database;
     String dbName = "MyDB";
     String createTable = "create table coldTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text);";
@@ -75,11 +76,11 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         
         //ArrayAdapter<String> Adapter;
         //Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrlist);
-        CustomAdapter Adapter = new CustomAdapter(this, R.layout.listviewitem, arrlist2);
+        Adapter = new CustomAdapter(this, R.layout.listviewitem, arrlist2);
         ListView list = (ListView)findViewById(R.id.l_view_cold);
  
         list.setAdapter(Adapter);
- 
+        list.setOnItemLongClickListener(this);
 
 
     }
@@ -196,7 +197,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
                 final String sql = "delete from coldTable where id = "+ position;
                 dialog.dismiss();
                 Log.i("test", "onclick");
-                database.execSQL(sql);
+                database.execSQL(sql);                
             }
         });
  
