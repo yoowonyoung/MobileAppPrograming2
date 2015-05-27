@@ -4,10 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="21" />
-	<uses-permission android:name="android.permission.INTERNET" />
+   
+    
+	<uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -15,6 +14,7 @@
     <uses-permission android:name="com.example.deokr.myapplication.permission.C2D_MESSAGE" />
     <permission android:name="com.example.refrigerator.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ref_menu"
@@ -31,6 +31,12 @@
         </activity>
         <activity
             android:name=".CoolAddActivity">
+        </activity>
+        <activity
+            android:name=".IngredientActivity">
+        </activity>
+        <activity
+            android:name=".RecipeActivity">
         </activity>
         <activity
             android:name=".MainActivity"
@@ -50,8 +56,7 @@
                 <category android:name="com.example.refrigerator" />
             </intent-filter>
         </receiver>
-        <service android:name=".GCMIntentService" />
-        
+        <service android:name=".GCMIntentService" /> 
     </application>
-
+	
 </manifest>

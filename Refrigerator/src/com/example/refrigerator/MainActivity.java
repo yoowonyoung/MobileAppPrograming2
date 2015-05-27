@@ -24,13 +24,18 @@ public class MainActivity extends Activity {
         switch (view.getId())
         {
             case R.id.coolBtn:
-            Intent intent = new Intent(this, CoolActivity.class);
-            startActivity(intent);
-            break;
+            	Intent intent = new Intent(this, CoolActivity.class);
+            	startActivity(intent);
+            	break;
 
             case R.id.ColdBtn:
                 Intent intent1 = new Intent(this, ColdActivity.class);
                 startActivity(intent1);
+                break;
+            
+            case R.id.RecipeBtn:
+                Intent intent2 = new Intent(this, IngredientActivity.class);
+                startActivity(intent2);
                 break;
         }
     }
