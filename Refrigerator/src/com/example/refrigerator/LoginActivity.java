@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     String dbName = "MyDB";
-    String createTable = "create table If Not Exist UserTable (id text ,pw text);";
+    String createTable = "create table If Not Exist UserIDTable (id text ,pw text);";
     SQLiteDatabase database;
     EditText id;
     EditText pw;
@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
 				// TODO Auto-generated method stub
 				String getId = id.getText().toString();
             	String getPw = pw.getText().toString();
-            	String sql = "select * from UserTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
+            	String sql = "select * from UserIDTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
             	Cursor result = database.rawQuery(sql, null);
             	if(result.moveToFirst()){
             		 Toast.makeText(LoginActivity.this,"환영합니다!", Toast.LENGTH_SHORT).show();
@@ -58,18 +58,22 @@ public class LoginActivity extends Activity {
 				// TODO Auto-generated method stub
 				String getId = id.getText().toString();
             	String getPw = pw.getText().toString();
-            	String sql = "select * from UserTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
-            	Cursor result = database.rawQuery(sql, null);
-            	if(result.moveToFirst()){
-            		 Toast.makeText(LoginActivity.this,"이미 존재하는 ID 입니다", Toast.LENGTH_SHORT).show();
-            		 id.setText("");
-                 	 pw.setText("");
+            	if(getId.equals("") || getPw.equals("")){
+            		Toast.makeText(LoginActivity.this,"ID혹은 PW를 입력 해주세요", Toast.LENGTH_SHORT).show();
             	}else {
-            		String sql2 = "insert into UserTable  (id, pw)  values (" + "'"+getId+"'" + "," +"'"+getPw+"')";
-                	database.execSQL(sql2);
-                	Toast.makeText(LoginActivity.this,"가입이 완료 되었습니다!", Toast.LENGTH_SHORT).show();
-                	id.setText("");
-                	pw.setText("");
+            		String sql = "select * from UserIDTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
+            		Cursor result = database.rawQuery(sql, null);
+            		if(result.moveToFirst()){
+            			Toast.makeText(LoginActivity.this,"이미 존재하는 ID 입니다", Toast.LENGTH_SHORT).show();
+            			id.setText("");
+            			pw.setText("");
+            		}else {
+            			String sql2 = "insert into UserIDTable  (id, pw)  values (" + "'"+getId+"'" + "," +"'"+getPw+"')";
+            			database.execSQL(sql2);
+            			Toast.makeText(LoginActivity.this,"가입이 완료 되었습니다!", Toast.LENGTH_SHORT).show();
+            			id.setText("");
+            			pw.setText("");
+            		}
             	}
             	
 			}
@@ -88,7 +92,7 @@ public class LoginActivity extends Activity {
 	            case R.id.btnLogin:
 	            	String getId = id.getText().toString();
 	            	String getPw = pw.getText().toString();
-	            	String sql = "select * from UserTable where id =" + getId + "and pw = " +getPw;
+	            	String sql = "select * from UserIDTable where id =" + getId + "and pw = " +getPw;
 	            	Cursor result = database.rawQuery(sql, null);
 	            	if(result.moveToFirst()){
 	            		 Toast.makeText(LoginActivity.this,
