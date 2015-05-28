@@ -194,7 +194,6 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         final Integer selectedPos = i;
         AlertDialog.Builder alertDlg = new AlertDialog.Builder(view.getContext());
         alertDlg.setTitle(R.string.alert_title_question);
-        Log.i("test", "1");
         alertDlg.setPositiveButton( R.string.button_yes, new DialogInterface.OnClickListener(){
  
             @Override

@@ -42,19 +42,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void registerGcm() {
-
-        GCMRegistrar.checkDevice(this);
-        GCMRegistrar.checkManifest(this);
-
-        final String regId = GCMRegistrar.getRegistrationId(this);
-
-        if (regId.equals("")) {
-            GCMRegistrar.register(this, "356070819593" );
-        } else {
-            Log.e("id", regId);
-        }
-    }
 
 
     @Override

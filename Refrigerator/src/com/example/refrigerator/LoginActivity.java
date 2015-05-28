@@ -1,65 +1,124 @@
 package com.example.refrigerator;
 
-import com.example.refrigerator.util.SystemUiHider;
-
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.os.Build;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see SystemUiHider
- */
 public class LoginActivity extends Activity {
-	/**
-	 * Whether or not the system UI should be auto-hidden after
-	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-	 */
-	private static final boolean AUTO_HIDE = true;
 
-	/**
-	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-	 * user interaction before hiding the system UI.
-	 */
-	private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-	/**
-	 * If set, will toggle the system UI visibility upon interaction. Otherwise,
-	 * will show the system UI visibility upon interaction.
-	 */
-	private static final boolean TOGGLE_ON_CLICK = true;
-
-	/**
-	 * The flags to pass to {@link SystemUiHider#getInstance}.
-	 */
-	private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-	/**
-	 * The instance of the {@link SystemUiHider} for this activity.
-	 */
-
+    String dbName = "MyDB";
+    String createTable = "create table If Not Exist UserTable (id text ,pw text);";
+    SQLiteDatabase database;
+    EditText id;
+    EditText pw;
+    Button btnLogIn;
+    Button btnSignUp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+        database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
+        createTable();
+        id = (EditText) findViewById(R.id.editID);
+        pw = (EditText) findViewById(R.id.editPW);
+        btnLogIn = (Button) findViewById(R.id.btnLogin);
+        btnSignUp = (Button) findViewById(R.id.btnSignup);
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String getId = id.getText().toString();
+            	String getPw = pw.getText().toString();
+            	String sql = "select * from UserTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
+            	Cursor result = database.rawQuery(sql, null);
+            	if(result.moveToFirst()){
+            		 Toast.makeText(LoginActivity.this,"환영합니다!", Toast.LENGTH_SHORT).show();
+            		 finish();
+            	}else {
+            		Toast.makeText(LoginActivity.this,
+                            "ID 혹은 PW를 확인 해주세요", Toast.LENGTH_SHORT).show();
+            	}
+			}
+		});
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String getId = id.getText().toString();
+            	String getPw = pw.getText().toString();
+            	String sql = "select * from UserTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
+            	Cursor result = database.rawQuery(sql, null);
+            	if(result.moveToFirst()){
+            		 Toast.makeText(LoginActivity.this,"이미 존재하는 ID 입니다", Toast.LENGTH_SHORT).show();
+            		 id.setText("");
+                 	 pw.setText("");
+            	}else {
+            		String sql2 = "insert into UserTable  (id, pw)  values (" + "'"+getId+"'" + "," +"'"+getPw+"')";
+                	database.execSQL(sql2);
+                	Toast.makeText(LoginActivity.this,"가입이 완료 되었습니다!", Toast.LENGTH_SHORT).show();
+                	id.setText("");
+                	pw.setText("");
+            	}
+            	
+			}
+		});
+        
+        
 		// Upon interacting with UI controls, delay any scheduled hide()
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
-		Handler handler = new Handler(){
-			@Override
-			public void handleMessage(Message msg) {
-				finish();
-			}
-		};
-		handler.sendEmptyMessageDelayed(0, 6000);
+
 	}
+	 public void onClick(View view) {
+		 	Log.i("here", view.toString());
+	        switch (view.getId())
+	        {
+	            case R.id.btnLogin:
+	            	String getId = id.getText().toString();
+	            	String getPw = pw.getText().toString();
+	            	String sql = "select * from UserTable where id =" + getId + "and pw = " +getPw;
+	            	Cursor result = database.rawQuery(sql, null);
+	            	if(result.moveToFirst()){
+	            		 Toast.makeText(LoginActivity.this,
+	                             "환영합니다!", Toast.LENGTH_SHORT).show();
+	            		 finish();
+	            	}else {
+	            		Toast.makeText(LoginActivity.this,
+	                             "ID 혹은 PW를 확인 해주세요", Toast.LENGTH_SHORT).show();
+	            		finish();
+	            	}
+	            	break;
+
+	            case R.id.btnSignup:
+
+	                break;
+
+	        }
+	 }
+	public void createTable(){
+        try{
+            database.execSQL(createTable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	public void onBackPressed() {
+        //super.onBackPressed();
+		moveTaskToBack(true);
+		finish();
+		android.os.Process.killProcess(android.os.Process.myPid());
+    }
 
 }
