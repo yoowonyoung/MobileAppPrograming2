@@ -17,6 +17,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //// 일반적인 UI형식(activity class)와 java 코드를 연결시켜주는 부분
+        Intent i = new Intent(this,LoginActivity.class);
+        startActivity(i);
     }
 
     public void onClick(View view) {

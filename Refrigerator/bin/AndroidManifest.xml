@@ -40,6 +40,9 @@
             android:name=".RecipeActivity">
         </activity>
         <activity
+            android:name=".LoginActivity">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="자도냉" >
             <intent-filter>
