@@ -23,7 +23,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ResultActivity extends Activity {
 
 	ListView myListview;
-	String key1 = "f9c32681a2ad8aa1bd6d587810421f13"; //네이버에서 발급 받은 인증키
+	String key1 = "eb7cc5af375f2efc3c4b6194bf8457bc"; //네이버에서 발급 받은 인증키
 	String Data;
 	int count = 6;
 	//더보기 기능으로 1개가 지워져 보인다.
