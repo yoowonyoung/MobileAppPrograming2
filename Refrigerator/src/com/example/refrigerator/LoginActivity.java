@@ -28,7 +28,6 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
-        createTable();
         id = (EditText) findViewById(R.id.editID);
         pw = (EditText) findViewById(R.id.editPW);
         btnLogIn = (Button) findViewById(R.id.btnLogin);
@@ -70,9 +69,10 @@ public class LoginActivity extends Activity {
             		}else {
             			String sql2 = "insert into UserIDTable  (id, pw)  values (" + "'"+getId+"'" + "," +"'"+getPw+"')";
             			database.execSQL(sql2);
-            			Toast.makeText(LoginActivity.this,"가입이 완료 되었습니다!", Toast.LENGTH_SHORT).show();
+            			Toast.makeText(LoginActivity.this,"가입이 완료 되었습니다!\n환영합니다!", Toast.LENGTH_SHORT).show();
             			id.setText("");
             			pw.setText("");
+	            		finish();
             		}
             	}
             	
@@ -101,7 +101,6 @@ public class LoginActivity extends Activity {
 	            	}else {
 	            		Toast.makeText(LoginActivity.this,
 	                             "ID 혹은 PW를 확인 해주세요", Toast.LENGTH_SHORT).show();
-	            		finish();
 	            	}
 	            	break;
 
