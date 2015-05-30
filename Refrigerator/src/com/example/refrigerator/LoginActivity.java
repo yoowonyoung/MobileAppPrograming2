@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
     String dbName = "MyDB";
-    String createTable = "create table If Not Exist UserIDTable (id text ,pw text);";
+    String createTable = "create table UserIDTable (id text ,pw text);";
     SQLiteDatabase database;
     EditText id;
     EditText pw;
