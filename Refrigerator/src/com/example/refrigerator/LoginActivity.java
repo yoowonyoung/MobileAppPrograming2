@@ -28,6 +28,7 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
+        createTable();
         id = (EditText) findViewById(R.id.editID);
         pw = (EditText) findViewById(R.id.editPW);
         btnLogIn = (Button) findViewById(R.id.btnLogin);
