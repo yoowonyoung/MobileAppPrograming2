@@ -86,31 +86,6 @@ public class LoginActivity extends Activity {
 		// while interacting with the UI.
 
 	}
-	 public void onClick(View view) {
-		 	Log.i("here", view.toString());
-	        switch (view.getId())
-	        {
-	            case R.id.btnLogin:
-	            	String getId = id.getText().toString();
-	            	String getPw = pw.getText().toString();
-	            	String sql = "select * from UserIDTable where id =" + getId + "and pw = " +getPw;
-	            	Cursor result = database.rawQuery(sql, null);
-	            	if(result.moveToFirst()){
-	            		 Toast.makeText(LoginActivity.this,
-	                             "환영합니다!", Toast.LENGTH_SHORT).show();
-	            		 finish();
-	            	}else {
-	            		Toast.makeText(LoginActivity.this,
-	                             "ID 혹은 PW를 확인 해주세요", Toast.LENGTH_SHORT).show();
-	            	}
-	            	break;
-
-	            case R.id.btnSignup:
-
-	                break;
-
-	        }
-	 }
 	public void createTable(){
         try{
             database.execSQL(createTable);
