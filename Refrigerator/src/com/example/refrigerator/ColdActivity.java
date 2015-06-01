@@ -113,6 +113,14 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         }
         result.close();
     }
+    @Override
+    protected void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	arrlist2.clear();
+        selectData();
+        Adapter.notifyDataSetChanged();
+    }
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -136,23 +144,16 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         });
  
         alertDlg.setNegativeButton( R.string.button_no, new DialogInterface.OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface arg0, int arg1) {
-				// TODO Auto-generated method stub
-				
-			}
  
-            /*@Override
+            @Override
             public void onClick( DialogInterface dialog, int which ) {
                 String position = arr_id_list.get(selectedPos);
                 dialog.dismiss();
-                Log.i("test", "1");
-                Intent intent = new Intent(SubActivity.this, UpdateDB.class);
+                Intent intent = new Intent(ColdActivity.this, UpdateActivity.class);
                 intent.putExtra("p_id", position);
-                Log.i("test", "2");
+                intent.putExtra("tablename", "coldTable");
                 startActivity(intent);
-            }*/
+            }
         });
  
         alertDlg.setMessage(R.string.alert_msg_delete);
