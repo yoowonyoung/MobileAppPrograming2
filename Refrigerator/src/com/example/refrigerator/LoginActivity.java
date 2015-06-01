@@ -61,7 +61,7 @@ public class LoginActivity extends Activity {
             	if(getId.equals("") || getPw.equals("")){
             		Toast.makeText(LoginActivity.this,"ID혹은 PW를 입력 해주세요", Toast.LENGTH_SHORT).show();
             	}else {
-            		String sql = "select * from UserIDTable where id =" + "'"+getId+"'" + "and pw = " +"'"+getPw+"'";
+            		String sql = "select * from UserIDTable where id =" + "'"+getId+"'";
             		Cursor result = database.rawQuery(sql, null);
             		if(result.moveToFirst()){
             			Toast.makeText(LoginActivity.this,"이미 존재하는 ID 입니다", Toast.LENGTH_SHORT).show();

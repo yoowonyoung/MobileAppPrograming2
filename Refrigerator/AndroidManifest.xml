@@ -4,67 +4,66 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-   
-    
-	<uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.example.deokr.myapplication.permission.C2D_MESSAGE" />
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="21"/>
-    <permission android:name="com.example.refrigerator.permission.C2D_MESSAGE"
+
+    <uses-sdk
+        android:minSdkVersion="19"
+        android:targetSdkVersion="21" />
+
+    <permission
+        android:name="com.example.refrigerator.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ref_menu"
         android:label="자도냉"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".ColdActivity">
+        <activity android:name=".ColdActivity" >
         </activity>
-        <activity
-            android:name=".ColdAddActivity">
+        <activity android:name=".ColdAddActivity" >
         </activity>
-        <activity
-            android:name=".CoolActivity">
+        <activity android:name=".CoolActivity" >
         </activity>
-        <activity
-            android:name=".CoolAddActivity">
+        <activity android:name=".CoolAddActivity" >
         </activity>
-        <activity
-            android:name=".IngredientActivity">
+        <activity android:name=".IngredientActivity" >
         </activity>
-        <activity
-            android:name=".RecipeActivity">
+        <activity android:name=".RecipeActivity" >
         </activity>
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" >
         </activity>
-       
         <activity
             android:name=".MainActivity"
             android:label="자도냉" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        
         </activity>
         <activity
-     		android:name="com.google.zxing.client.android.CaptureActivity"
-     		android:screenOrientation="landscape"
-     		android:configChanges="orientation|keyboardHidden"
-     		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-     		android:windowSoftInputMode="stateAlwaysHidden">
-      		<intent-filter>
-         		<action android:name="com.google.zxing.client.android.SCAN"/>
-         		<category android:name="android.intent.category.DEFAULT"/>
-      		</intent-filter>
-		</activity> 
-      
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.SCAN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UpdateActivity"
+            android:label="@string/title_activity_update" >
+        </activity>
     </application>
-	
+
 </manifest>
