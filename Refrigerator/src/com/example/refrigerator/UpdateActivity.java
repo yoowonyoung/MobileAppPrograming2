@@ -27,7 +27,6 @@ public class UpdateActivity extends Activity {
     EditText etlimitmonth;
     EditText etlimitday;
     ImageButton Updatebtn;
-    Button btnScan;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
