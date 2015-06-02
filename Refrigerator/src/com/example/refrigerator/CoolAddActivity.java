@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -34,6 +37,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -59,6 +65,11 @@ public class CoolAddActivity extends Activity {
     String dbName = "MyDB";
     
     Button btnScan;
+    CheckBox notifyBtn;
+    
+    int alarmCode = 0;
+    int notifyCheck = 0;
+    PendingIntent pendingIntent;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,7 @@ public class CoolAddActivity extends Activity {
         createDatabase();
         
         btnScan = (Button)findViewById(R.id.btnScan);
+        notifyBtn = (CheckBox)findViewById(R.id.coolnotifyBtn);
         
         btnScan.setOnClickListener(new View.OnClickListener() {
 			
@@ -87,6 +99,19 @@ public class CoolAddActivity extends Activity {
 			}
 		});
 
+        notifyBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+      	  
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                    boolean isChecked) {
+                    if (isChecked) {
+                    	notifyCheck = 1;
+                    } else {
+                    	notifyCheck = 0;
+                    }
+            }
+        });
+        
         btninsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,17 +128,10 @@ public class CoolAddActivity extends Activity {
                             "구매일 정보를 입력 하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                insertData(etname.getText().toString(), etbuyyear.getText().toString(), etbuymonth.getText().toString(), etbuyday.getText().toString(), etlimityear.getText().toString(), etlimitmonth.getText().toString(), etlimitday.getText().toString());
-                /*new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            post();
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();*/
+                insertData(etname.getText().toString(), etbuyyear.getText().toString(), etbuymonth.getText().toString(), etbuyday.getText().toString(), etlimityear.getText().toString(), etlimitmonth.getText().toString(), etlimitday.getText().toString(), notifyCheck);
+                
+                setNotification();
+                
             }
 
         });
@@ -135,37 +153,7 @@ public class CoolAddActivity extends Activity {
         finish();
 
     }
-    /*
-    private void post() throws UnsupportedEncodingException {
-        HttpClient client = new DefaultHttpClient();
-        String url = SERVER_ADDRESS + "/insert.php";
-        HttpPost post = new HttpPost(url);
-        List<NameValuePair> params = new ArrayList<NameValuePair>(7);
-        params.add(new BasicNameValuePair("name", etname.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buyyear", etbuyyear.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buymonth", etbuymonth.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buyday", etbuyday.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limityear", etlimityear.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limitmonth", etlimitmonth.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limitday", etlimitday.getText().toString().trim()));
-
-        HttpEntity enty = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-        //UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-        post.setEntity(enty);
-
-        HttpResponse responsePost = null;
-        try {
-            responsePost = client.execute(post);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        Intent intent = new Intent(this, CoolActivity.class);
-        startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
-
-        finish();
-
-
-    }*/
+    
     private String get(String type, String code) {
     	String url = SERVER_ADDRESS + "BarcodeSearch.php"+"?type="+type+"&code="+code;
     	HttpPost post = new HttpPost(url);
@@ -202,13 +190,13 @@ public class CoolAddActivity extends Activity {
     public void createDatabase(){
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
     }
-    private void insertData(String name, String buyyear, String buymonth, String buyday, String limityear, String limitmonth, String limitday){
-   	 
+    private void insertData(String name, String buyyear, String buymonth, String buyday, String limityear, String limitmonth, String limitday, int notifyCheck){
+      	 
         database.beginTransaction();
  
         try{
-            String sql = "insert into coolTable (name, buyyear, buymonth, buyday, limityear, limitmonth, limitday)"
-            		+ " values ('"+name+ "','"+buyyear+ "','"+buymonth+ "','"+buyday+ "','"+limityear+ "','"+limitmonth+ "','"+limitday+ "');";
+        	String sql = "insert into coolTable (name, buyyear, buymonth, buyday, limityear, limitmonth, limitday, notifyCheck)"
+            		+ " values ('"+name+ "','"+buyyear+ "','"+buymonth+ "','"+buyday+ "','"+limityear+ "','"+limitmonth+ "','" + limitday+ "'," + notifyCheck + ");";
             database.execSQL(sql);
             database.setTransactionSuccessful();
         }catch(Exception e){
@@ -220,6 +208,7 @@ public class CoolAddActivity extends Activity {
         Intent intent = new Intent(this, CoolActivity.class);
         startActivity(intent);
     }
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
@@ -263,6 +252,31 @@ public class CoolAddActivity extends Activity {
     		etlimitday.setText(curDay.format(date));
     	}
     };
+    
+    private void setNotification() {
+    	Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
+        calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));
+
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+1);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent myIntent = new Intent(CoolAddActivity.this, MyReceiver.class);
+        myIntent.putExtra("foodName", etname.getText());
+		myIntent.putExtra("buyYear", etbuyyear.getText());
+		myIntent.putExtra("buyMonth", etbuymonth.getText());
+		myIntent.putExtra("buyDay", etbuyday.getText());
+		myIntent.putExtra("alarmCode", alarmCode);
+        pendingIntent = PendingIntent.getBroadcast(CoolAddActivity.this, alarmCode, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        alarmCode++;
+    }
 }
 
 

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.http.HttpResponse;
@@ -17,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -26,6 +29,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -49,7 +55,11 @@ public class ColdAddActivity extends Activity {
     String dbName = "MyDB";
     
     Button btnScan;
+    CheckBox notifyBtn;
     
+    int alarmCode = 0;
+    int notifyCheck = 0;
+    PendingIntent pendingIntent;
     
     
     @Override
@@ -66,11 +76,12 @@ public class ColdAddActivity extends Activity {
         etlimitday = (EditText) findViewById(R.id.coldLimitDay);
         
         btnScan = (Button)findViewById(R.id.btnScan);
+        notifyBtn = (CheckBox)findViewById(R.id.notifyBtn);
         
         createDatabase();
         
         btnScan.setOnClickListener(new View.OnClickListener() {
-			
+        	
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -79,6 +90,19 @@ public class ColdAddActivity extends Activity {
 				startActivityForResult(intent,0);
 			}
 		});
+        
+        notifyBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        	  
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                    boolean isChecked) {
+                    if (isChecked) {
+                        notifyCheck = 1;
+                    } else {
+                        notifyCheck = 0;
+                    }
+            }
+        });
         
         btninsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,18 +120,9 @@ public class ColdAddActivity extends Activity {
                             "구매일 정보를 입력 하세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                insertData(etname.getText().toString(), etbuyyear.getText().toString(), etbuymonth.getText().toString(), etbuyday.getText().toString(), etlimityear.getText().toString(), etlimitmonth.getText().toString(), etlimitday.getText().toString());
-                /*
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            post();
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();*/
+                insertData(etname.getText().toString(), etbuyyear.getText().toString(), etbuymonth.getText().toString(), etbuyday.getText().toString(), etlimityear.getText().toString(), etlimitmonth.getText().toString(), etlimitday.getText().toString(), notifyCheck);
+                
+                setNotification();
             }
 
         });
@@ -203,16 +218,16 @@ public class ColdAddActivity extends Activity {
     }
  
 
-    private void insertData(String name, String buyyear, String buymonth, String buyday, String limityear, String limitmonth, String limitday){
-    	 
+    private void insertData(String name, String buyyear, String buymonth, String buyday, String limityear, String limitmonth, String limitday, int notifyCheck){
         database.beginTransaction();
  
         try{
-            String sql = "insert into coldTable (name, buyyear, buymonth, buyday, limityear, limitmonth, limitday)"
-            		+ " values ('"+name+ "','"+buyyear+ "','"+buymonth+ "','"+buyday+ "','"+limityear+ "','"+limitmonth+ "','"+limitday+ "');";
+            String sql = "insert into coldTable (name, buyyear, buymonth, buyday, limityear, limitmonth, limitday, notifyCheck)"
+            		+ " values ('"+name+ "','"+buyyear+ "','"+buymonth+ "','"+buyday+ "','"+limityear+ "','"+limitmonth+ "','" + limitday+ "'," + notifyCheck + ");";
             database.execSQL(sql);
             database.setTransactionSuccessful();
         }catch(Exception e){
+        	Log.e("안됨","insert data 실패");
             e.printStackTrace();
         }finally{
             database.endTransaction();
@@ -269,4 +284,32 @@ public class ColdAddActivity extends Activity {
     		etlimitday.setText(curDay.format(date));
     	}
     };
+    
+    private void setNotification() {
+    	Calendar calendar = Calendar.getInstance();
+    	
+        calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
+        calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));
+
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+1);
+        calendar.set(Calendar.SECOND, 0);
+        
+
+        Toast.makeText(this, "인텐트앞", 1).show();
+        Intent myIntent = new Intent(ColdAddActivity.this, MyReceiver.class);
+        myIntent.putExtra("foodName", etname.getText());
+		myIntent.putExtra("buyYear", etbuyyear.getText());
+		myIntent.putExtra("buyMonth", etbuymonth.getText());
+		myIntent.putExtra("buyDay", etbuyday.getText());
+		myIntent.putExtra("alarmCode", alarmCode);
+        pendingIntent = PendingIntent.getBroadcast(ColdAddActivity.this, alarmCode, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        Toast.makeText(this, "알람등록", 1).show();
+        alarmCode++;
+    }
 }

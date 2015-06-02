@@ -44,7 +44,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
     CustomAdapter Adapter = null;
     SQLiteDatabase database;
     String dbName = "MyDB";
-    String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text);";
+    String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
 
 	
 	TextView et;
@@ -61,19 +61,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cool);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
-        //et = (TextView)findViewById(R.id.textView5);
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    get();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        }).start();*/
+        
         arrlist = new ArrayList<String>();
         arr_id_list = new ArrayList<String>();
     	arrlist2 = new ArrayList<ListItem>();
@@ -105,75 +93,10 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
                 finish();
                 break;
 
-
-
         }
 
     }
-    /*private void get() {
-        String url = SERVER_ADDRESS + "search.php";
-        HttpPost post = new HttpPost(url);
-        HttpClient client = new DefaultHttpClient();
-        String json = "";
-        JSONObject jObj = null;
-
-        String name;
-        String buyyear;
-        String buymonth;
-        String buyday;
-        String limityear;
-        String limitmonth;
-        String limitday;
-
-        ResponseHandler reshandler = new BasicResponseHandler();
-        try {
-            //Extract Method
-            //HttpResponse response = client.execute(post);
-           // BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
-            BufferedReader reader = getHttp(post,client);
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            // hier habe ich das JSON-File als String
-            json = sb.toString();
-            JSONObject root = new JSONObject(json);
-            JSONArray ja = root.getJSONArray("results");
-            index = ja.length();
-            final StringBuilder history = new StringBuilder("");
-            for(int i = 0; i < ja.length()-1; i++){
-                JSONObject jo = ja.getJSONObject(i);
-                name = jo.getString("name");
-                buyyear = jo.getString("buyyear ");
-                buymonth =  jo.getString("buymonth");
-                buyday = jo.getString("buyday ");
-                limityear = jo.getString("limityear");
-                limitmonth = jo.getString("limitmonth");
-                limitday =  jo.getString("limitday");
-                listItems.add(new ListItem(name,buyyear,buymonth,buyday,limityear,limitmonth,limitday));
-                history.append("이름 : " + listItems.get(i).getData(0) + " (구매일 " + listItems.get(i).getData(1) + " - " +listItems.get(i).getData(2) + " - " + listItems.get(i).getData(3) +")\n" + "유통기한 : " + listItems.get(i).getData(4) + " - " + listItems.get(i).getData(5) + " - " + listItems.get(i).getData(6) + "\n\n");
-            }
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable(){
-                        @Override
-                        public void run() {
-                            et.setText(history.toString());
-                        }
-                    });
-                }
-            }).start();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }*/
+   
     private BufferedReader getHttp(HttpPost post, HttpClient client) throws IOException {
         HttpResponse response = client.execute(post);
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));

@@ -47,7 +47,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
     CustomAdapter Adapter = null;
     SQLiteDatabase database;
     String dbName = "MyDB";
-    String createTable = "create table coldTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text);";
+    String createTable = "create table coldTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
     ListView listview = null;
     ArrayList<ListItem> listItems = new ArrayList<ListItem>();//ListItem 형식의 배열을 받아옴. 
     ListItem list;
