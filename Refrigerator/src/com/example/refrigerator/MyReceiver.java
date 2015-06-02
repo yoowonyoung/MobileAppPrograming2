@@ -32,14 +32,18 @@ public class MyReceiver extends BroadcastReceiver {
 
         NotificationManager notifier = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Notification notify = new Notification(R.drawable.ic_launcher, "alarm!",
-                System.currentTimeMillis());
-
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity( context.getApplicationContext(), alarmCode, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        notify.setLatestEventInfo(context, "AlarmApp", name, pendingNotificationIntent);
-
-        notify.flags |= Notification.FLAG_AUTO_CANCEL;
-        notify.vibrate = new long[] { 200, 200, 500, 300 };
+        
+        Notification notify = new Notification.Builder(context)
+        .setWhen(System.currentTimeMillis())
+        .setTicker("자도냉 유통기한이 다 됐습니다.")
+        .setContentTitle("자도냉 유통기한 알림")
+        .setStyle(new Notification.BigTextStyle()
+         .bigText(buyYear+"년"+buyMonth+"월"+buyDay+"일에 구매한\n" + name + "의 유통기한이 만료되었습니다."))
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentIntent(pendingNotificationIntent)
+        .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE)
+        .setAutoCancel(true).build();
 
         notifier.notify(alarmCode, notify);
 

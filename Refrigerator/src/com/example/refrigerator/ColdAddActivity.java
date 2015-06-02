@@ -244,33 +244,35 @@ public class ColdAddActivity extends Activity {
     };
     
     private void setNotification() {
-    	Calendar calendar = Calendar.getInstance();
-    	
-    	//시연용 코드
-    	calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
-        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
-        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+    	if(notifyCheck == 1) {
+    		Calendar calendar = Calendar.getInstance();
+        	
+        	//시연용 코드
+        	calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+            calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
 
-        //실제로 쓰일 코드
-        /*calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
-        calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));*/
+            //실제로 쓰일 코드
+            /*calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
+            calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
+            calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));*/
 
-        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
-        calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
-        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+1);
-        calendar.set(Calendar.SECOND, 0);
-        
-        Intent myIntent = new Intent(ColdAddActivity.this, MyReceiver.class);
-        myIntent.putExtra("foodName", etname.getText());
-		myIntent.putExtra("buyYear", etbuyyear.getText());
-		myIntent.putExtra("buyMonth", etbuymonth.getText());
-		myIntent.putExtra("buyDay", etbuyday.getText());
-		myIntent.putExtra("alarmCode", alarmCode);
-        pendingIntent = PendingIntent.getBroadcast(ColdAddActivity.this, alarmCode, myIntent,0);
+            calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
+            calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
+            calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+1);
+            calendar.set(Calendar.SECOND, 0);
+            
+            Intent myIntent = new Intent(ColdAddActivity.this, MyReceiver.class);
+            myIntent.putExtra("foodName", etname.getText().toString());
+    		myIntent.putExtra("buyYear", etbuyyear.getText().toString());
+    		myIntent.putExtra("buyMonth", etbuymonth.getText().toString());
+    		myIntent.putExtra("buyDay", etbuyday.getText().toString());
+    		myIntent.putExtra("alarmCode", alarmCode);
+            pendingIntent = PendingIntent.getBroadcast(ColdAddActivity.this, alarmCode, myIntent,0);
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-        alarmCode++;
+            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+            alarmCode++;
+    	}
     }
 }
