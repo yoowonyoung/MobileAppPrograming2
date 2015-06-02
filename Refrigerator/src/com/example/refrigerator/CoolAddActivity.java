@@ -273,10 +273,10 @@ public class CoolAddActivity extends Activity {
             calendar.set(Calendar.SECOND, 0);
 
             Intent myIntent = new Intent(CoolAddActivity.this, MyReceiver.class);
-            myIntent.putExtra("foodName", etname.getText());
-    		myIntent.putExtra("buyYear", etbuyyear.getText());
-    		myIntent.putExtra("buyMonth", etbuymonth.getText());
-    		myIntent.putExtra("buyDay", etbuyday.getText());
+            myIntent.putExtra("foodName", etname.getText().toString());
+    		myIntent.putExtra("buyYear", etbuyyear.getText().toString());
+    		myIntent.putExtra("buyMonth", etbuymonth.getText().toString());
+    		myIntent.putExtra("buyDay", etbuyday.getText().toString());
     		myIntent.putExtra("alarmCode", alarmCode);
             pendingIntent = PendingIntent.getBroadcast(CoolAddActivity.this, alarmCode, myIntent,0);
 
