@@ -67,7 +67,7 @@ public class CoolAddActivity extends Activity {
     Button btnScan;
     CheckBox notifyBtn;
     
-    int alarmCode = 0;
+    int alarmCode = 200;
     int notifyCheck = 0;
     PendingIntent pendingIntent;
     
@@ -256,9 +256,14 @@ public class CoolAddActivity extends Activity {
     private void setNotification() {
     	Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
+    	//시연용 코드
+    	calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+        
+        /*calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
         calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));*/
 
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
         calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));

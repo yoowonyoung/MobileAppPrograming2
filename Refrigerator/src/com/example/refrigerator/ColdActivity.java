@@ -163,6 +163,7 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
 	}
     public void createTable(){
         try{
+        	database.execSQL("drop table coolTable;");
             database.execSQL(createTable);
         } catch (Exception e) {
             e.printStackTrace();

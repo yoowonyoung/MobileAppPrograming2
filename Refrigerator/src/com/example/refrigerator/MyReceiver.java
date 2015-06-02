@@ -21,9 +21,6 @@ public class MyReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
 
-        //Intent service1 = new Intent(context, MyAlarmService.class);
-        //context.startService(service1);
-    	
     	name = intent.getExtras().getString("foodName");
     	buyYear = intent.getExtras().getString("buyYear");
     	buyMonth = intent.getExtras().getString("buyMonth");

@@ -57,7 +57,7 @@ public class ColdAddActivity extends Activity {
     Button btnScan;
     CheckBox notifyBtn;
     
-    int alarmCode = 0;
+    int alarmCode = 100;
     int notifyCheck = 0;
     PendingIntent pendingIntent;
     
@@ -288,17 +288,21 @@ public class ColdAddActivity extends Activity {
     private void setNotification() {
     	Calendar calendar = Calendar.getInstance();
     	
-        calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
+    	//시연용 코드
+    	calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH));
+
+        //실제로 쓰일 코드
+        /*calendar.set(Calendar.MONTH, Integer.parseInt(etlimitmonth.getText().toString())-1);
         calendar.set(Calendar.YEAR, Integer.parseInt(etlimityear.getText().toString()));
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));
+        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(etlimitday.getText().toString()));*/
 
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY));
         calendar.set(Calendar.AM_PM, calendar.get(Calendar.AM_PM));
         calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE)+1);
         calendar.set(Calendar.SECOND, 0);
         
-
-        Toast.makeText(this, "인텐트앞", 1).show();
         Intent myIntent = new Intent(ColdAddActivity.this, MyReceiver.class);
         myIntent.putExtra("foodName", etname.getText());
 		myIntent.putExtra("buyYear", etbuyyear.getText());
@@ -309,7 +313,6 @@ public class ColdAddActivity extends Activity {
 
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-        Toast.makeText(this, "알람등록", 1).show();
         alarmCode++;
     }
 }
