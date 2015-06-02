@@ -137,48 +137,7 @@ public class ColdAddActivity extends Activity {
     }
 
 
-    /*public void onClick(View view) {
-
-    	Log.e("onclick","!!!!!!!");
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
-
-        finish();
-
-    }*/
-    /*
-    private void post() throws UnsupportedEncodingException {
-        HttpClient client = new DefaultHttpClient();
-        String url = SERVER_ADDRESS + "/insert.php";
-        HttpPost post = new HttpPost(url);
-        List<NameValuePair> params = new ArrayList<NameValuePair>(7);
-        params.add(new BasicNameValuePair("name", etname.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buyyear", etbuyyear.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buymonth", etbuymonth.getText().toString().trim()));
-        params.add(new BasicNameValuePair("buyday", etbuyday.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limityear", etlimityear.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limitmonth", etlimitmonth.getText().toString().trim()));
-        params.add(new BasicNameValuePair("limitday", etlimitday.getText().toString().trim()));
-
-        HttpEntity enty = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-        //UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-        post.setEntity(enty);
-
-        HttpResponse responsePost = null;
-        try {
-            responsePost = client.execute(post);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-        Intent intent = new Intent(this, ColdActivity.class);
-        startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
-
-        finish();
-
-
-
-    }*/
+   
     private String get(String type, String code) {
     	String url = SERVER_ADDRESS + "BarcodeSearch.php"+"?type="+type+"&code="+code;
     	HttpPost post = new HttpPost(url);
@@ -227,7 +186,6 @@ public class ColdAddActivity extends Activity {
             database.execSQL(sql);
             database.setTransactionSuccessful();
         }catch(Exception e){
-        	Log.e("안됨","insert data 실패");
             e.printStackTrace();
         }finally{
             database.endTransaction();
