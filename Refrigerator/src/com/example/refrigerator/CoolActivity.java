@@ -106,7 +106,6 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         String sql = "select * from coolTable";
         Cursor result = database.rawQuery(sql, null);
         result.moveToFirst();
-
         while(!result.isAfterLast()){
             arr_id_list.add(result.getString(0));
             //arrlist.add(result.getString(1));

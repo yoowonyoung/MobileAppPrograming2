@@ -10,16 +10,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="com.example.deokr.myapplication.permission.C2D_MESSAGE" />
 
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="21" />
-
-    <permission
-        android:name="com.example.refrigerator.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
