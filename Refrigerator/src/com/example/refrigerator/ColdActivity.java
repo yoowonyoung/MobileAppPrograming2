@@ -27,9 +27,6 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
 	private String dbName = "MyDB";
 	private String createTable = "create table coldTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
 	private ListView listview = null;
-	private ArrayList<ListItem> listItems = new ArrayList<ListItem>();//ListItem 형식의 배열을 받아옴. 
-	private ListItem list;
-    private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
     android.os.Handler hanler = new android.os.Handler();
 
     @Override

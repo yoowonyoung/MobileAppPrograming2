@@ -38,20 +38,15 @@ import java.util.ArrayList;
  * Created by DeokR on 2015-02-15.
  */
 public class CoolActivity extends Activity implements AdapterView.OnItemLongClickListener {
-	ArrayList<ListItem> arrlist2 = null;
-    ArrayList<String> arr_id_list = null;
-    CustomAdapter Adapter = null;
-    SQLiteDatabase database;
-    String dbName = "MyDB";
-    String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
-
-	
-	TextView et;
-    int index;
-    ArrayList<ListItem> listItems = new ArrayList<ListItem>();
-    ListItem list;
-    android.os.Handler hanler = new android.os.Handler();
+	private ArrayList<ListItem> itemList = null;
+	private ArrayList<String> id_list = null;
+    private CustomAdapter Adapter = null;
+    private SQLiteDatabase database;
+	private ListView listview = null;
+	private String dbName = "MyDB";
+	private String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
+	android.os.Handler hanler = new android.os.Handler();
 
     @Override
 
@@ -61,16 +56,16 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         setContentView(R.layout.activity_cool);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
         
-        arr_id_list = new ArrayList<String>();
-    	arrlist2 = new ArrayList<ListItem>();
+        id_list = new ArrayList<String>();
+    	itemList = new ArrayList<ListItem>();
     	createTable();
 
         selectData();
-        Adapter = new CustomAdapter(this, R.layout.listviewitem, arrlist2);
-        ListView list = (ListView)findViewById(R.id.l_view_cool);
+        Adapter = new CustomAdapter(this, R.layout.listviewitem, itemList);
+        listview = (ListView)findViewById(R.id.l_view_cool);
  
-        list.setAdapter(Adapter);
-        list.setOnItemLongClickListener(this);
+        listview.setAdapter(Adapter);
+        listview.setOnItemLongClickListener(this);
 
     }
 
@@ -94,21 +89,16 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         }
 
     }
-   
-    private BufferedReader getHttp(HttpPost post, HttpClient client) throws IOException {
-        HttpResponse response = client.execute(post);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
-        return reader;
-    }
+
     public void selectData(){
         String sql = "select * from coolTable";
         Cursor result = database.rawQuery(sql, null);
         result.moveToFirst();
         while(!result.isAfterLast()){
-            arr_id_list.add(result.getString(0));
+            id_list.add(result.getString(0));
             //arrlist.add(result.getString(1));
             ListItem item = new ListItem(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7));
-            arrlist2.add(item);
+            itemList.add(item);
             result.moveToNext();
         }
         result.close();
@@ -118,7 +108,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
     protected void onResume() {
     	// TODO Auto-generated method stub
     	super.onResume();
-    	arrlist2.clear();
+    	itemList.clear();
         selectData();
         Adapter.notifyDataSetChanged();
     }
@@ -133,12 +123,12 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
  
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String position = arr_id_list.get(selectedPos);
+                String position = id_list.get(selectedPos);
                 final String sql = "delete from coolTable where id = "+ position;
                 dialog.dismiss();
                 Log.i("test", "onclick");
                 database.execSQL(sql);
-                arrlist2.clear();
+                itemList.clear();
                 selectData();
                 Adapter.notifyDataSetChanged();
             }
@@ -148,7 +138,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         	
         	@Override
             public void onClick( DialogInterface dialog, int which ) {
-            	String position = arr_id_list.get(selectedPos);
+            	String position = id_list.get(selectedPos);
                 dialog.dismiss();
                 Intent intent = new Intent(CoolActivity.this, UpdateActivity.class);
                 intent.putExtra("p_id", position);
