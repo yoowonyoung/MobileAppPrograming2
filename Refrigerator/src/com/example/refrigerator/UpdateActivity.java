@@ -15,18 +15,18 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 public class UpdateActivity extends Activity {
-	SQLiteDatabase database;
-	String tablename;
-    String id;
-    ImageButton btninsert;
-    EditText etname;
-    EditText etbuyyear;
-    EditText etbuymonth;
-    EditText etbuyday;
-    EditText etlimityear;
-    EditText etlimitmonth;
-    EditText etlimitday;
-    ImageButton Updatebtn;
+	private SQLiteDatabase database;
+	private String tablename;
+	private String id;
+	private ImageButton btninsert;
+	private EditText etname;
+	private EditText etbuyyear;
+	private EditText etbuymonth;
+	private EditText etbuyday;
+	private EditText etlimityear;
+	private EditText etlimitmonth;
+	private EditText etlimitday;
+	private ImageButton Updatebtn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

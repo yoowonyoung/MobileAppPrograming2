@@ -15,13 +15,13 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-    String dbName = "MyDB";
-    String createTable = "create table UserIDTable (id text ,pw text);";
-    SQLiteDatabase database;
-    EditText id;
-    EditText pw;
-    Button btnLogIn;
-    Button btnSignUp;
+    private String dbName = "MyDB";
+    private String createTable = "create table UserIDTable (id text ,pw text);";
+    private SQLiteDatabase database;
+    private EditText id;
+    private EditText pw;
+    private Button btnLogIn;
+    private Button btnSignUp;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
