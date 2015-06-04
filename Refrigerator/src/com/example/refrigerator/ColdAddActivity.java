@@ -13,7 +13,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,30 +35,27 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-/**
- * Created by DeokR on 2015-02-25.
- */
 public class ColdAddActivity extends Activity {
 
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
-    ImageButton btninsert;
-    EditText etname;
-    EditText etbuyyear;
-    EditText etbuymonth;
-    EditText etbuyday;
-    EditText etlimityear;
-    EditText etlimitmonth;
-    EditText etlimitday;
+    private ImageButton btninsert;
+    private EditText etname;
+    private EditText etbuyyear;
+    private EditText etbuymonth;
+    private EditText etbuyday;
+    private EditText etlimityear;
+    private EditText etlimitmonth;
+    private EditText etlimitday;
     
-    SQLiteDatabase database;
-    String dbName = "MyDB";
+    private SQLiteDatabase database;
+    private String dbName = "MyDB";
     
-    Button btnScan;
-    CheckBox notifyBtn;
+    private Button btnScan;
+    private CheckBox notifyBtn;
     
-    int alarmCode = 100;
-    int notifyCheck = 0;
-    PendingIntent pendingIntent;
+    private int alarmCode = 100;
+    private int notifyCheck = 0;
+    private PendingIntent pendingIntent;
     
     
     @Override
@@ -158,6 +154,7 @@ public class ColdAddActivity extends Activity {
     			sb.append(line + "\n");
     		}
     		json = sb.toString();
+    		
     		JSONObject root = new JSONObject(json);
     		name = root.getString("name");
     		Log.i("name : ", name);

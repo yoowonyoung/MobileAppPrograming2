@@ -38,7 +38,6 @@ import java.util.ArrayList;
  * Created by DeokR on 2015-02-15.
  */
 public class CoolActivity extends Activity implements AdapterView.OnItemLongClickListener {
-	ArrayList<String> arrlist = null;
 	ArrayList<ListItem> arrlist2 = null;
     ArrayList<String> arr_id_list = null;
     CustomAdapter Adapter = null;
@@ -62,7 +61,6 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
         setContentView(R.layout.activity_cool);
         database = openOrCreateDatabase(dbName, MODE_MULTI_PROCESS, null);
         
-        arrlist = new ArrayList<String>();
         arr_id_list = new ArrayList<String>();
     	arrlist2 = new ArrayList<ListItem>();
     	createTable();
