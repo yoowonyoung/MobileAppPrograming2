@@ -143,9 +143,7 @@ public class ColdAddActivity extends Activity {
     	String name = null;
     	String expridate = null;
     	
-    
-    	ResponseHandler reshandler = new BasicResponseHandler();
-    	try {
+       	try {
     		HttpResponse response = client.execute(post);
     		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
     		StringBuilder sb = new StringBuilder();

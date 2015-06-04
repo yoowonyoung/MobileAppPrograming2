@@ -3,24 +3,16 @@ package com.example.refrigerator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,41 +27,37 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-/**
- * Created by DeokR on 2015-02-25.
- */
+
 
 public class CoolAddActivity extends Activity {
 
     private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
-    ImageButton btninsert;
-    EditText etname;
-    EditText etbuyyear;
-    EditText etbuymonth;
-    EditText etbuyday;
-    EditText etlimityear;
-    EditText etlimitmonth;
-    EditText etlimitday;
+    private ImageButton btninsert;
+    private EditText etname;
+    private EditText etbuyyear;
+    private EditText etbuymonth;
+    private EditText etbuyday;
+    private EditText etlimityear;
+    private EditText etlimitmonth;
+    private EditText etlimitday;
      
-    SQLiteDatabase database;
-    String dbName = "MyDB";
+    private SQLiteDatabase database;
+    private String dbName = "MyDB";
     
-    Button btnScan;
-    CheckBox notifyBtn;
+    private Button btnScan;
+    private CheckBox notifyBtn;
     
-    int alarmCode = 200;
-    int notifyCheck = 0;
-    PendingIntent pendingIntent;
+    private int alarmCode = 200;
+    private int notifyCheck = 0;
+    private PendingIntent pendingIntent;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,9 +151,7 @@ public class CoolAddActivity extends Activity {
     	String name = null;
     	String expridate = null;
     	
-    
-    	ResponseHandler reshandler = new BasicResponseHandler();
-    	try {
+       	try {
     		HttpResponse response = client.execute(post);
     		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"utf-8"));
     		StringBuilder sb = new StringBuilder();
