@@ -56,9 +56,6 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
         {
 
             case R.id.coldUperBtn: //case문으로 나누어 이미지버튼을 눌렀을때 행해지는 이벤트를 구성하였다.
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent); //여기서 실행되는 이벤트는 버튼클릭시(onclick) mainActvity2로 이동하는것이다.
-
                 finish();
                 break;
 

@@ -52,9 +52,7 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
     public void onClick(View view) {
         switch (view.getId())
         {
-            case R.id.imageButton2:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+            case R.id.coolUpperBtn:
                 finish();
                 break;
 

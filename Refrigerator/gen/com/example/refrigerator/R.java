@@ -1784,6 +1784,7 @@ containing a value of this type.
         public static final int coolLimitMonth=0x7f0b0065;
         public static final int coolLimitYear=0x7f0b0064;
         public static final int coolName=0x7f0b005f;
+        public static final int coolUpperBtn=0x7f0b0058;
         public static final int coolnotifyBtn=0x7f0b0060;
         public static final int dataItem01=0x7f0b0095;
         public static final int dataItem02=0x7f0b0096;
@@ -1811,7 +1812,6 @@ containing a value of this type.
         public static final int icon=0x7f0b002d;
         public static final int ifRoom=0x7f0b001d;
         public static final int image=0x7f0b002a;
-        public static final int imageButton2=0x7f0b0058;
         public static final int imageView11=0x7f0b004b;
         public static final int image_view=0x7f0b0091;
         public static final int itemText=0x7f0b0069;
