@@ -2,24 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mein5"
     android:layout_gravity="center"
+    android:background="@drawable/login"
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".MainActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:text="자  .  도  . 냉" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content" >
-			
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
             <TextView
                 android:id="@+id/txtID"
                 android:layout_width="wrap_content"
@@ -33,13 +49,12 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:ems="10" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/txtPW"
@@ -55,13 +70,12 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:gravity="center" >
 
             <Button
                 android:id="@+id/btnLogin"
@@ -76,10 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SignUp" />
-
         </LinearLayout>
-
     </LinearLayout>
-    
 
 </LinearLayout>

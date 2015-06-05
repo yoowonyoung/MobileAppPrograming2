@@ -1,56 +1,103 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/check"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mein5"
-    android:orientation="horizontal"
-    android:weightSum="2"
+    android:orientation="vertical"
+    android:weightSum="3"
     tools:context=".MainActivity" >
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:weightSum="2" >
 
-        <ImageButton
+        <LinearLayout
             android:id="@+id/coolBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/jang2"
-            android:layout_gravity="center"
-            android:onClick="onClick" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cool"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:orientation="horizontal" >
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/windy" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="40dp"
+                android:text="냉장실"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ColdBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/cold"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/snow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:text="냉동실"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:id="@+id/RecipeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" 
-        android:gravity="center_vertical"
-        
-        >
+        android:background="@drawable/search"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="horizontal" >
 
-        <ImageButton
-            android:id="@+id/ColdBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dong2"
-            android:gravity="center"
-            android:onClick="onClick" />
-        
-        <ImageButton
-            android:id="@+id/RecipeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/recipe"
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:onClick="onClick" />
-        
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/cook" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:text="레시피 검색"
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:textStyle="bold" />
     </LinearLayout>
-    
 
 </LinearLayout>
