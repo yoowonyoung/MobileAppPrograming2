@@ -21,6 +21,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -192,6 +195,11 @@ public class CoolAddActivity extends Activity {
             database.endTransaction();
         }
         finish();
+        Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUri(getApplicationContext(),RingtoneManager.TYPE_NOTIFICATION);
+        Ringtone ringtone = RingtoneManager.getRingtone(getApplicationContext(), ringtoneUri);
+        ringtone.play();
+        Toast.makeText(CoolAddActivity.this,
+                "저장되었습니다!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, CoolActivity.class);
         startActivity(intent);
     }
