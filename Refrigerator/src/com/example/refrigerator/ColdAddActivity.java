@@ -158,9 +158,7 @@ public class ColdAddActivity extends Activity {
     		
     		JSONObject root = new JSONObject(json);
     		name = root.getString("name");
-    		Log.i("name : ", name);
     		expridate = root.getString("expridate");
-    		Log.i("date : ", expridate);	
     	} catch (IOException e) {
     		e.printStackTrace();
     	} catch (JSONException e) {

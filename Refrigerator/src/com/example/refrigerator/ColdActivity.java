@@ -105,7 +105,6 @@ public class ColdActivity extends Activity implements AdapterView.OnItemLongClic
                 String position = id_list.get(selectedPos);
                 final String sql = "delete from coldTable where id = "+ position;
                 dialog.dismiss();
-                Log.i("test", "onclick");
                 database.execSQL(sql);
                 itemList.clear();
                 selectData();
