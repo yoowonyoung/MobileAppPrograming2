@@ -9,6 +9,9 @@
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#ff000000"
+        android:textSize="25dp"
         android:text="재료를 선택하십시오." />
 
     <Spinner
@@ -17,38 +20,43 @@
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
         android:prompt="@string/spinner1"
+        android:background="@drawable/combobox"
         />
 
     <TextView
         android:id="@+id/itemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ff0000ff"
+        android:textSize="20dp"
         android:hint="선택된 재료" />
     
-    <Button
+    <ImageButton
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="추가" />
-	
-	<Button
+        android:background="@drawable/addbtn"
+        android:src="@drawable/addselector" />
+		
+	<ImageButton
         android:id="@+id/removeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="제거" />
+        android:background="@drawable/removebtn"
+        android:src="@drawable/removeselector" />
     
-    <Button
+    <ImageButton
         android:id="@+id/finishBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="레시피검색" />
+        android:background="@drawable/finishbtn"
+        android:src="@drawable/finishselector" />
 	
 	<ImageButton
             android:id="@+id/RecipeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/re7"
-            android:layout_gravity="right|bottom"
-            android:onClick="onClick" />
+            android:layout_gravity="right|bottom" />
 	
 </LinearLayout>

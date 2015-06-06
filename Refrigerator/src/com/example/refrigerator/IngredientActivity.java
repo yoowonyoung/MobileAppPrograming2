@@ -13,24 +13,26 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class IngredientActivity extends Activity implements OnItemSelectedListener, OnClickListener {
 
+	private ImageButton addBtn;
+	private ImageButton removeBtn;
+	private ImageButton finishBtn;
 	private Spinner sp;
-	private Button addBtn;
-	private Button removeBtn;
-	private Button finishBtn;
 	private TextView text;
 	private ArrayList selectedItem;
-	private int i = -1; //아이템인덱스
+	private int i = -1; //ArrayList의 인덱스
 	private String currentItem;
 	private StringBuffer searchMessage; //재료들 모두 종합한 스트링 
-	SQLiteDatabase database;
-    String dbName = "MyDB";
-    ArrayList<String> arr_id_list = null;
+	private	SQLiteDatabase database;
+    private String dbName = "MyDB";
+    private ArrayList<String> arr_id_list = null;
     
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +56,10 @@ public class IngredientActivity extends Activity implements OnItemSelectedListen
 		sp.setOnItemSelectedListener(this);
 		
 		searchMessage = new StringBuffer();
-		addBtn = (Button) findViewById(R.id.addBtn);
-		removeBtn = (Button) findViewById(R.id.removeBtn);
-		finishBtn = (Button) findViewById(R.id.finishBtn);
-		text = (TextView) findViewById(R.id.itemText);	
-		
+		addBtn = (ImageButton) findViewById(R.id.addBtn);
+		removeBtn = (ImageButton) findViewById(R.id.removeBtn);
+		finishBtn = (ImageButton) findViewById(R.id.finishBtn);
+		text = (TextView) findViewById(R.id.itemText);
 		addBtn.setOnClickListener(this);
 		removeBtn.setOnClickListener(this);
 		finishBtn.setOnClickListener(this);
@@ -66,13 +67,14 @@ public class IngredientActivity extends Activity implements OnItemSelectedListen
 		
 	}
 	
-	public void onClick(View view) {
+	public void onClick(View view) { 
         switch (view.getId())
         {
             case R.id.addBtn:
             	selectedItem.add(currentItem);
+            	i++;
+            	
                 searchMessage.append(currentItem + " ");
-                i++;
                 text.setText(searchMessage.toString());
                 break;
                 
@@ -81,15 +83,18 @@ public class IngredientActivity extends Activity implements OnItemSelectedListen
             	{
             		return;
             	}
-            	int end = searchMessage.toString().length() + 1;
+            	else
+            	{
+            		int end = searchMessage.toString().length() + 1;
             	
-            	String removed = searchMessage.toString().replace(selectedItem.get(i).toString() + " ", ""); //맨뒤 아이템만 제거
-            	selectedItem.remove(i);
-            	i--;
-            	searchMessage.delete(0, end);
-            	searchMessage.append(removed);
-            	
-            	text.setText(searchMessage.toString());
+            		String removed = searchMessage.toString().replace(selectedItem.get(i).toString() + " ", ""); //맨뒤 아이템만 제거
+            		selectedItem.remove(i);
+            		i--;
+            		
+            		searchMessage.delete(0, end);
+            		searchMessage.append(removed);
+            		text.setText(searchMessage.toString());
+            	}
             	break;
             	
             case R.id.finishBtn:
@@ -108,20 +113,13 @@ public class IngredientActivity extends Activity implements OnItemSelectedListen
 
     }
 	
-	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                                                            //arg2 - 인덱스
-			long arg3) {
-
-		// TODO Auto-generated method stub
 		currentItem = arr_id_list.get(arg2);
-
 	}
 
 	@Override
-	public void onNothingSelected(AdapterView<?> parent) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onNothingSelected(AdapterView<?> parent) {}
 	
 	public void selectData(){
 	        String sql = "select * from coolTable";

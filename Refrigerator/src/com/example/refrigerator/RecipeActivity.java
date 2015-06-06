@@ -28,32 +28,29 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class RecipeActivity extends Activity {
-	ListView myListview;
 	
-	String Data;
-	int count = 6;
-	
-	CustomListAdapter adapter;
-	ArrayList<XmlData> m_xmlData;
-	NaverParserTask parserTask;
-	UrlExtractAsyncTask urlTask;
+	private ListView myListview;
+	private String Data;
+	private int count = 6;
+	private CustomListAdapter adapter;
+	private ArrayList<XmlData> m_xmlData;
+	private NaverParserTask parserTask;
+	private UrlExtractAsyncTask urlTask;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_recipe);
 		
 		myListview = (ListView) findViewById(R.id.myListview);
-	
-		
+
 		Intent intent = getIntent();
 		Bundle myBundle = intent.getExtras();
 		Data = myBundle.getString("key");
 		//검색값 가져오기
 
-		parserTask = new NaverParserTask(); //doInBack메소드에 무한루프 아니기때문에 이거 한번 실행되면 끝, 그래서 파싱할때마다 생성해줘야됨
-		parserTask.execute(Data, String.valueOf(count));
+		parserTask = new NaverParserTask(); //doInBack메소드에 무한루프 아니기때문에 한번 실행 후 종료되면 끝, 그래서 파싱할때마다 생성해줘야됨
+		parserTask.execute(Data, String.valueOf(count)); //검색값과 count(보여주는갯수)변수 보내줌
 
 		myListview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -105,12 +102,8 @@ public class RecipeActivity extends Activity {
 		return StringArrayData ;
 	}	
 	
-	
-	
-	public class UrlExtractAsyncTask extends AsyncTask<String, String, String>
+	public class UrlExtractAsyncTask extends AsyncTask<String, String, String> //나온 결과가 실제 인터넷 주소값 
 	{
-		//나온 결과가 실제 인터넷 주소값 
-		@Override
 		protected String doInBackground(String... params) {
 			StringBuffer xmlRead = null; 
 			HttpURLConnection httpUrlConn = null;
@@ -119,37 +112,30 @@ public class RecipeActivity extends Activity {
 			String callUrl = "";
 			
 			try {
-
 				  callUrl = params[0]; // api링크 넣음
 				  xmlRead = new StringBuffer("");
 				  
 				  httpUrlConn = (HttpURLConnection) new URL(callUrl).openConnection();
 				  httpUrlConn.setRequestMethod("POST");
 				  httpUrlConn.setRequestProperty("Content-Type", "apllication/xml; charset=UTF-8");
-				  httpUrlConn.setUseCaches(false);
-				  httpUrlConn.setDoOutput(true);
+				  httpUrlConn.setUseCaches(false); 
+				  httpUrlConn.setDoOutput(true); 
 				  httpUrlConn.setDoInput(true);
 				  PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpUrlConn.getOutputStream(), "UTF-8"));
 				  printWriter.write("Param1=AAA&Param2=BBB");
 				  printWriter.flush();
 
 				  int resultCode = httpUrlConn.getResponseCode();
-
 				  if (resultCode != 200) { // 서비스 호출 결과가 성공이 아닌 경우
-
 				    throw new IOException("Service responded with code[" + resultCode + "] in httpUrlService");
-
 				  } else {
-
 				    inputReader = new InputStreamReader(httpUrlConn.getInputStream(), "UTF-8");
-
 				    buffReader = new BufferedReader(inputReader);
-
 				    String strDmy = "";
-
-				    while ((strDmy = buffReader.readLine()) != null){
-
-				      if (!strDmy.equals("")){
+				    while ((strDmy = buffReader.readLine()) != null)
+				    {
+				      if (!strDmy.equals(""))
+				      {
 				    	  StringTokenizer st = new StringTokenizer(strDmy,"\"");
 				    	  while(st.hasMoreTokens())
 				    	  {
@@ -159,123 +145,90 @@ public class RecipeActivity extends Activity {
 			    		  			xmlRead.append(temp);
 			    			  } 
 				    	  }
-
 				      }
-
 				    }
 
 				  }
-
-				} catch(IOException e){
-					
-				}
-				finally {
-
+				} catch(IOException e){	}
+				finally 
+				{
 				  try {
-
-				    if (buffReader != null) {
-				      buffReader.close();
-				     }
-
-				  } catch (IOException e) {
-				  }
-
+				    if (buffReader != null) { buffReader.close(); }
+				  } catch (IOException e) { }
 				  try {
-				    if (inputReader != null) {
-				      inputReader.close();
-				    }
-
-				  } catch (IOException e) {
-				  }
-
+				    if (inputReader != null) { inputReader.close(); }
+				  } catch (IOException e) { }
 				}
+			
 			return xmlRead.toString();
 		}	
 	}
 	public class NaverParserTask extends AsyncTask <String, String, ArrayList<XmlData> > 
-	//첫번째파라미터는 백그라운드메소드에 넘겨질 인자, 두번째것은 진행중데이터반환값(?), 세번째는 백그라운드메소드 반환값
+	//첫번째파라미터는 백그라운드메소드에 넘겨질 인자, 두번째것은 진행중데이터반환값, 세번째는 백그라운드메소드 반환값
 	{
-		
-		@Override
 		protected ArrayList<XmlData> doInBackground(String... params) {
 			String key1 = "eb7cc5af375f2efc3c4b6194bf8457bc"; //네이버에서 발급 받은 인증키
 			m_xmlData = new ArrayList<XmlData>();
 			XmlData xmlData = null;
 			String m_searchTxt = "";
 			int count = Integer.parseInt(params[1]);
+			
 			try {
 				m_searchTxt = URLEncoder.encode(params[0], "UTF8");
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
 			}
-
-			// XML 결과물 파싱하기
-			try {
-
+			
+			try { 
 				URL text = new URL(
 						"http://openapi.naver.com/search?key="+key1+"&query="
 								+ m_searchTxt + "&display=" + count
 								+ "&start=1&target=blog"); //블로그 검색 - target = blog //sort = 유사도순(기본값) - sim, 날짜순 - date
 
-				XmlPullParserFactory parserCreator = XmlPullParserFactory
-						.newInstance();
+				XmlPullParserFactory parserCreator = XmlPullParserFactory.newInstance();
 				XmlPullParser parser = parserCreator.newPullParser();
-
 				parser.setInput(text.openStream(), null);
-
 				Log.i("NET", "Parsing...");
-
+				
 				// status.setText("Parsing....");
-
 				int parseEvent = parser.getEventType();
 				while (parseEvent != XmlPullParser.END_DOCUMENT) {
-
 					switch (parseEvent) {
 					case XmlPullParser.START_TAG:
 						String tag = parser.getName();				
 
 						if (tag.compareTo("title") == 0) {
 							xmlData = new XmlData();
-							//자료 구조 1개 생성
-							
+							//자료 구조 1개 생성	
 							String titleSrc = parser.nextText().replace("<b>", " ").replace("</b>", " ").replace("&lt;", "").replace("&gt;", "").replace("&amp;","").replace("&quot;", "");
-							
 							xmlData.d_title = titleSrc;
 						}
-						
-						
 						if (tag.compareTo("description") == 0) {
 							String descriptionSrc = parser.nextText().replace("<b>", " ").replace("</b>", " ").replace("&lt;", "").replace("&gt;", "").replace("&amp;","").replace("&quot;", "");
 							xmlData.d_description = descriptionSrc;
-							
 						}if (tag.compareTo("link") == 0) {
 							String linkSrc = parser.nextText().replace("<b>", " ").replace("</b>", " ").replace("&lt;", "").replace("&gt;", "").replace("&amp;","").replace("&quot;", "");
 							xmlData.d_link = linkSrc;
 							m_xmlData.add(xmlData);			
 							//자료 구조 1개 넣기
 						}
-						
 						break;
 					}
 					parseEvent = parser.next();
 
-					// xmlData = null;
-					// While next 다음으로 넘긴다.
 				}
-				Log.i("NET", "End...");
-
+				Log.i("NET", "End...");	
 			} catch (Exception e) {
 				Log.i("NET", "Parsing Failed!");
 			}	
 			return m_xmlData;
 		}
-		protected void onPostExecute(ArrayList<XmlData> data)
+		protected void onPostExecute(ArrayList<XmlData> data) //백그라운드메소드 종료 후 실행, 파싱한 데이터를 넣어 리스트형식으로 출력
 		{
 			if(data !=null)
 			{
 				adapter = new CustomListAdapter(RecipeActivity.this, R.layout.listitem, data);
 				myListview.setAdapter(adapter);	
-				
 			}
 		}	
 	}	
