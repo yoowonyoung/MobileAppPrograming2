@@ -2,57 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/ingrebkg" >
-	
+    android:background="@drawable/ingrebkg"
+    android:orientation="vertical" >
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:text="재료를 선택하십시오."
         android:textColor="#ff000000"
         android:textSize="30dp"
-        android:text="재료를 선택하십시오." />
+        android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-        android:prompt="@string/spinner1"
-        android:background="@drawable/combobox"
-        />
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@drawable/combobox"
+            android:drawSelectorOnTop="true"
+            android:prompt="@string/spinner1" />
+
+        <ImageButton
+            android:id="@+id/addBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/addplate" />
+
+        <ImageButton
+            android:id="@+id/removeBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/removeplate" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/itemText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#ff0000ff"
-        android:textSize="25dp"
-        android:hint="선택된 재료" 
+        android:background="@drawable/textbkg"
+        android:hint="선택된 재료"
         android:padding="5dip"
-        android:background="@drawable/textbkg" 
-        />
-    
-    <ImageButton
-        android:id="@+id/addBtn"
-        android:layout_width="wrap_content"
+        android:textColor="#ff0000ff"
+        android:textSize="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/addbtn1"
-        />
-		
-	<ImageButton
-        android:id="@+id/removeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/removebtn1"
-         />
-    
-    <ImageButton
-        android:id="@+id/finishBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/finishbtn1"
-         />
-	
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <ImageButton
+            android:id="@+id/finishBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@drawable/recipeplate" />
+    </LinearLayout>
+
 </LinearLayout>
