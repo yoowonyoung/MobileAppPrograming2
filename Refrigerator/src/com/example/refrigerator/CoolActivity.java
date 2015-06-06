@@ -25,7 +25,6 @@ public class CoolActivity extends Activity implements AdapterView.OnItemLongClic
 	private ListView listview = null;
 	private String dbName = "MyDB";
 	private String createTable = "create table coolTable (id integer primary key ,name text , buyyear text , buymonth text , buyday text , limityear text ,limitmonth text , limitday text, notifyCheck int default 1);";
-    private final String SERVER_ADDRESS = "http://wonyoungdb.esy.es/";
 	android.os.Handler hanler = new android.os.Handler();
 
     @Override
