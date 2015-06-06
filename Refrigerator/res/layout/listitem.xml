@@ -3,7 +3,10 @@
 	android:layout_width="wrap_content" 
 	android:layout_height="wrap_content"  
  	android:orientation="horizontal"
- 	android:background = "#FFFFFF"
+ 	android:paddingLeft="12dip"
+ 	android:paddingRight="12dip"
+ 	android:paddingTop="2dip"
+ 	android:background = "@drawable/listbkg"
  	>
  	 	
   	<LinearLayout
@@ -20,7 +23,7 @@
 		    android:textStyle="bold"
 		    android:textSize="18dip"
 		    android:padding="5dip"		    
-		   android:textColor="#0000ff"
+		   android:textColor="#000000"
 		    
 		    />
 		<RelativeLayout

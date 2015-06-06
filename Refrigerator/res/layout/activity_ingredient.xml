@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="#ffffffff" >
+    android:background="@drawable/ingrebkg" >
 	
     <TextView
         android:id="@+id/textView1"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#ff000000"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:text="재료를 선택하십시오." />
 
     <Spinner
@@ -28,35 +28,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ff0000ff"
-        android:textSize="20dp"
-        android:hint="선택된 재료" />
+        android:textSize="25dp"
+        android:hint="선택된 재료" 
+        android:padding="5dip"
+        android:background="@drawable/textbkg" 
+        />
     
     <ImageButton
         android:id="@+id/addBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/addbtn"
-        android:src="@drawable/addselector" />
+        android:background="@drawable/addbtn1"
+        />
 		
 	<ImageButton
         android:id="@+id/removeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/removebtn"
-        android:src="@drawable/removeselector" />
+        android:background="@drawable/removebtn1"
+         />
     
     <ImageButton
         android:id="@+id/finishBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/finishbtn"
-        android:src="@drawable/finishselector" />
-	
-	<ImageButton
-            android:id="@+id/RecipeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/re7"
-            android:layout_gravity="right|bottom" />
+        android:background="@drawable/finishbtn1"
+         />
 	
 </LinearLayout>
