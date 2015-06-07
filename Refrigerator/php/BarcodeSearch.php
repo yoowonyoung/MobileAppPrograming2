@@ -7,7 +7,12 @@ $code = $_REQUEST [code];
 //$qry = "SELECT * FROM BarcodeInfo WHERE Code = $code";
 $qry = "SELECT * FROM BarcodeInfo WHERE Type = '$type' AND Code = $code";
 $result = mysqli_query ( $connect, $qry );
+$total_record = $result->num_rows;
+if($total_record == 0){
+	echo "{\"name\": 정보없음 ,\"expridate\":0}";
+}else {
+	list( $returntype, $returncode, $name, $expirydate) = mysqli_fetch_array($result);
+	echo "{\"name\":$name,\"expridate\":$expirydate}";
+}
 
-list( $returntype, $returncode, $name, $expirydate) = mysqli_fetch_array($result);
-echo "{\"name\":$name,\"expridate\":$expirydate}";
 ?>
