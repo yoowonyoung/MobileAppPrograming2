@@ -19,6 +19,7 @@ public class CustomListAdapter extends ArrayAdapter<Object> {
 			ArrayList items) {
 		super(context, textViewResourceId, items);
 		this.items = items;
+		items.remove(0);
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -49,7 +50,7 @@ public class CustomListAdapter extends ArrayAdapter<Object> {
 				TextView tv1 = (TextView) v.findViewById(R.id.dataItem01);
 				TextView tv2 = (TextView) v.findViewById(R.id.dataItem02);
 			
-				tv1.setText("재료명:"+ xmlData.d_title);
+				tv1.setText("레시피 이름:"+ xmlData.d_title);
 				tv2.setText("요약:" + xmlData.d_description);						
 			}
 		}
